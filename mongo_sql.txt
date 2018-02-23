@@ -1,0 +1,38 @@
+db.article_big_image.insert({
+    'id':123,
+    'title': '',                //标题
+    'detail': ''                //简介
+    'source': 'rmrbwx',         //作者（英文）
+    'source_detail': '人民日报', //作者(中文)
+    'cover': ['asdasd']         //封面图片
+    'channel': 'weixin',        //渠道
+    'spider_source': 'sougou',  //爬取来源.
+    'url': '',                  //源url. 微信的可能失效.
+    'content': '',              //存储在oss上页面的页面地址。
+    'original_time': '',        //发表时间.
+    'province': '',             //省
+    'city': '',                 //市
+    'like_num': 12,             //点赞数
+    'real_like_num': 0,         //自己用户点赞数
+    'read_num': 123,            //阅读数
+    'real_read_num': 0,         //真实用户阅读数
+    'comment_num': 0,           //评论数
+    'read_comment_num': 0,      //真是评论数
+    'forward_num': 0,           //转发数
+    'real_forward_num': 0,      //真实转发数
+    'tag': [],                  //标签
+    'md5': '',                  //md5值 'title#source'
+    'status_code': 0,           //状态吗 0原始， 1通过， 2丢弃， 3等待上线， 4已上线， 5历史。
+    'CTR': 0.0,                 //ctr
+    'show_num': 123,            //展示数
+    'click_num': 23,            //点击数
+    'update_time': '',          //更新时间
+    'created_at': ''            //插入时间
+})
+
+db.article_comment.insert({
+    'id': 1123, 'item_id': '', 'content': '',
+    'up_like': '', 'time': 213123, 'avatar': '', 'nickname': ''
+    'created_at': ''
+})
+
