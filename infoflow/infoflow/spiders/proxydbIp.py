@@ -2,7 +2,7 @@
 # @Author: shanzhu
 # @Date:   2018-01-23 19:27:31
 # @Last Modified by:   shanzhu
-# @Last Modified time: 2018-03-22 19:56:54
+# @Last Modified time: 2018-03-22 20:57:20
 
 from selenium import webdriver
 from bs4 import BeautifulSoup
@@ -19,6 +19,8 @@ class ProxydbIpSpider(object):
 
     def __init__(self):
         self.webdriver = webdriver.PhantomJS()
+        self.webdriver.set_page_load_timeout(6)  
+        self.webdriver.set_script_timeout(6)
         self.redis = util.uredis
         self.conf = util.conf
         self.logger = util.ulogger
@@ -30,10 +32,15 @@ class ProxydbIpSpider(object):
             yield url
 
     def get_html(self, url):
-        self.webdriver.get(url)
-        return self.webdriver.page_source
+        try:
+            self.webdriver.get(url)
+            return self.webdriver.page_source
+        except:
+            return None
 
     def parse(self, html):
+        if html is None:
+            return
         tree = BeautifulSoup(html, 'lxml')
         div = tree.find('div', class_='table-responsive')
         tbody = div.find('tbody')
