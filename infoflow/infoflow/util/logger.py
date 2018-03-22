@@ -2,7 +2,7 @@
 # @Author: shanzhu
 # @Date:   2017-12-04 11:15:43
 # @Last Modified by:   shanzhu
-# @Last Modified time: 2018-01-23 17:25:33
+# @Last Modified time: 2018-03-22 20:17:39
 import logging
 import traceback
 
@@ -24,18 +24,25 @@ class Logger(object):
         self.logger.setLevel(logging.DEBUG)
 
     def write(self, message, level='info', **kwds):
-        if level == 'debug':
-            self.logger.debug(message, **kwds)
-        elif level == 'info':
-            self.logger.info(message, **kwds)
-        elif level == 'warn':
-            self.logger.warn(message, **kwds)
-        else:
-            raise LoggerLevelNotSupportException()
+        try:
+            if level == 'debug':
+                self.logger.debug(message, **kwds)
+            elif level == 'info':
+                self.logger.info(message, **kwds)
+            elif level == 'warn':
+                self.logger.warn(message, **kwds)
+            else:
+                raise LoggerLevelNotSupportException()
+        except Exception as e:
+            if isinstance(e, LoggerLevelNotSupportException):
+                raise
 
     def error(self, message=''):
         message = traceback.format_exc() if message == '' else message
-        self.logger.error(message)
+        try:
+            self.logger.error(message)
+        except:
+            pass
 
     def __str__(self):
         return str(vars(self))

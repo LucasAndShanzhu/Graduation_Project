@@ -2,7 +2,7 @@
 # @Author: shanzhu
 # @Date:   2018-01-23 19:27:31
 # @Last Modified by:   shanzhu
-# @Last Modified time: 2018-03-19 21:08:27
+# @Last Modified time: 2018-03-22 19:56:54
 
 from selenium import webdriver
 from bs4 import BeautifulSoup
@@ -15,8 +15,7 @@ class ProxydbIpSpider(object):
 
     BASE_URL = 'http://proxydb.net/?protocol=https&country={}'
 
-    SLEEP_TIME = 2
-
+    SLEEP_TIME = 3
 
     def __init__(self):
         self.webdriver = webdriver.PhantomJS()
