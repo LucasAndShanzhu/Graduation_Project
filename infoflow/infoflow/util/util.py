@@ -2,7 +2,7 @@
 # @Author: shanzhu
 # @Date:   2017-12-11 09:20:42
 # @Last Modified by:   shanzhu
-# @Last Modified time: 2018-02-11 15:35:30
+# @Last Modified time: 2018-03-22 20:34:11
 import os
 import pymysql
 import random
@@ -18,7 +18,7 @@ from .logger import Logger
 from .sredis import SRedis
 from .mysql import Mysql
 
-conf = Config("/Users/gonglingxiao/Graduation_Project/infoflow/infoflow/util/spider.ini")
+conf = Config("/home/lucas/Graduation_Project/infoflow/infoflow/util/spider.ini")
 ulogger = Logger(conf.log.name, conf.log.path)
 uredis = SRedis(conf, ulogger)
 util_mysql = Mysql(conf, ulogger)

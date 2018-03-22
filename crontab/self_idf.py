@@ -2,7 +2,9 @@
 # @Author: shanzhu
 # @Date:   2018-03-21 20:11:38
 # @Last Modified by:   shanzhu
-# @Last Modified time: 2018-03-22 14:06:20
+# @Last Modified time: 2018-03-22 14:59:26
+# 
+# 获取自定义的idf-反词频文档.
 
 import requests
 import jieba

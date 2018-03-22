@@ -101,5 +101,5 @@ ITEM_PIPELINES = {
 
 #Log设定.
 # LOG_FILE = '/Users/gonglingxiao/var/log/spider/spider.log'
-LOG_FILE = '/Users/gonglingxiao/var/log/spider/spider_debug.log'
-# LOG_LEVEL = 'INFO'
+LOG_FILE = '/home/lucas/var/log/info.log'
+LOG_LEVEL = 'WARNING'

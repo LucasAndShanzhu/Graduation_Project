@@ -3,14 +3,14 @@
 index=0
 while true
 do 
-    cd /Users/gonglingxiao/Graduation_Project/infoflow/infoflow/spiders && python proxydbIp.py
+    cd /home/lucas/Graduation_Project/infoflow/infoflow/spiders && python proxydbIp.py
     if [ $index == 10 ]
     then 
-	   cd /Users/gonglingxiao/Graduation_Project/infoflow && python run.py crawl foreignip
+	   cd /home/lucas/Graduation_Project/infoflow && python run.py crawl foreignip
     fi
 	if [ $index == 60 ]
 	then
-		cd /Users/gonglingxiao/Graduation_Project/infoflow && python run.py crawl nationip
+		cd /home/lucas/Graduation_Project/infoflow && python run.py crawl nationip
 		index=0
     else
 		index=`expr $index + 1`
