@@ -2,7 +2,7 @@
 # @Author: shanzhu
 # @Date:   2018-01-26 19:06:31
 # @Last Modified by:   shanzhu
-# @Last Modified time: 2018-02-11 21:09:22
+# @Last Modified time: 2018-03-19 20:58:07
 
 import base64
 import urllib, time, datetime
@@ -92,15 +92,15 @@ class QingboWX(BaseSpider):
                 request = Request(url, callback=self.parse, errback=self._error_handle, headers=headers, dont_filter=True)
                 yield Request(url, callback=self.parse, errback=self._error_handle, headers=headers, dont_filter=True)
 
-        for type_ in QingboWX.TYPE_TAG_TABLE:
-            if type_ in QingboWX.AREA_TYPE_LIST:
-                for province, citys in QingboWX.PROVINCE_CITY.items():
-                    for city in citys:
-                        for page in xrange(1, 5):
-                            url = QingboWX.BASE_URL.format(page, urllib.quote(type_), urllib.quote(city), urllib.quote(province))
-                            print url
-                            request = Request(url, callback=self.parse, errback=self._error_handle, headers=headers, dont_filter=True)
-                            yield Request(url, callback=self.parse, errback=self._error_handle, headers=headers, dont_filter=True)
+        # for type_ in QingboWX.TYPE_TAG_TABLE:
+        #     if type_ in QingboWX.AREA_TYPE_LIST:
+        #         for province, citys in QingboWX.PROVINCE_CITY.items():
+        #             for city in citys:
+        #                 for page in xrange(1, 5):
+        #                     url = QingboWX.BASE_URL.format(page, urllib.quote(type_), urllib.quote(city), urllib.quote(province))
+        #                     print url
+        #                     request = Request(url, callback=self.parse, errback=self._error_handle, headers=headers, dont_filter=True)
+        #                     yield Request(url, callback=self.parse, errback=self._error_handle, headers=headers, dont_filter=True)
 
     def _parse(self, html, url, encoding, status_code):
         parse_result = urlparse.urlparse(url)
@@ -126,7 +126,7 @@ class QingboWX(BaseSpider):
                 like_num = self._get_abstract_num(like_num)
                 try:
                     tag_wxarc = QingboWX.TAG_WXARC.search(overall_data).groups()[0].split(',')[1:]
-                    url = tag_wxarc[0][1:-1]
+                    item_url = tag_wxarc[0][1:-1]
                     title = util.get_utf8_str(tag_wxarc[1][1:-1], encoding)
                     source = tag_wxarc[2][1:-1]
                     source_detail = util.get_utf8_str(tag_wxarc[3][1:-1], encoding)
@@ -134,7 +134,7 @@ class QingboWX(BaseSpider):
                     tag = QingboWX.TYPE_TAG_TABLE[item_type]
                     key = "{}#{}".format(title, source)
                     md5_key = md5(key).hexdigest()
-                    item = self._get_item(title, source, source_detail, url, original_time, province, city, like_num, read_num, tag, md5_key)
+                    item = self._get_item(title, source, source_detail, item_url, original_time, province, city, like_num, read_num, tag, md5_key)
                     yield item
                 except Exception:
                     ulogger.error()

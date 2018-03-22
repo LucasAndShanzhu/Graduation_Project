@@ -2,7 +2,7 @@
 # @Author: shanzhu
 # @Date:   2017-12-26 10:12:06
 # @Last Modified by:   shanzhu
-# @Last Modified time: 2018-02-22 10:47:29
+# @Last Modified time: 2018-03-22 11:11:56
 import os
 dir_path = os.getcwd() + '/../common'
 import sys
@@ -63,15 +63,19 @@ def thread_run(config):
                 html_name = 'html/{}'.format(html_parts[0])
                 html_source = html_parts[1]
                 html_path = html_parts[2]
-                res = download(html_path)
+                res = download(html_path, html_source)
                 if res is None:
                     raise Exception('download html %s failure' % html_path)
-                html_content = res.text
+                html_content = res.content
                 html_encoding = res.encoding
                 if html_source.endswith('wx'):
                     html_content = s_filter.filter_wx_article(html_content, html_encoding)
                     if html_content is None:
                         raise Exception('the {} may be failed'.format(''))
+                if html_source == 'toutiao':
+                    html_content = s_filter.filter_toutiao_article(html_content, html_encoding)
+                if html_source == 'ifeng':
+                    html_content = s_filter.filter_ifeng_article(html_content, html_encoding, html_parts[0])
                 try:
                     oss.upload('spider-lucas', html_name, html_content)
                 except Exception as e:
@@ -83,10 +87,18 @@ def thread_run(config):
                 html = redis.spop('need_parsed_html')
                 time.sleep(1)
 
-def download(url):
+def download(url, html_source):
     try:
-        res = requests.get(url)
-        if res.status_code != 200:
+        res = None
+        if html_source == 'toutiao':
+            headers = {
+                'referer': 'https://www.toutiao.com/', 
+                'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36'
+            }
+            res = requests.get(url, headers=headers)
+        else:
+            res = requests.get(url)
+        if not res or res.status_code != 200:
             return None
         else:
             return res

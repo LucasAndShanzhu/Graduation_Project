@@ -2,7 +2,7 @@
 # @Author: shanzhu
 # @Date:   2018-02-11 15:17:34
 # @Last Modified by:   shanzhu
-# @Last Modified time: 2018-02-23 14:43:27
+# @Last Modified time: 2018-03-19 14:18:02
 import base64
 import urllib, time, datetime
 import json, re, random
@@ -76,7 +76,7 @@ class SougouWX(BaseSpider):
                 item = ArticleBigImageItem()
                 img_box = li.find('div', class_='img-box')
                 header_a =img_box.find('a')
-                url = header_a.get('href')
+                item_url = header_a.get('href')
                 icon = header_a.find('img').get('src')
                 txt_box = li.find('div', class_='txt-box')
                 title = txt_box.find('h3').find('a').get_text().encode(encoding)
@@ -89,7 +89,7 @@ class SougouWX(BaseSpider):
                 source = account_a.get_text().encode(encoding);
                 item['title'] = title
                 item['source'] = item['source_detail'] = source
-                item['url'] = url
+                item['url'] = item_url
                 item['original_time'] = original_time
                 item['image'] = [icon]
                 item['tag'] = itype

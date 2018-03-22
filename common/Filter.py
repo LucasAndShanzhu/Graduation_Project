@@ -2,7 +2,7 @@
 # @Author: shanzhu
 # @Date:   2017-12-18 09:24:00
 # @Last Modified by:   shanzhu
-# @Last Modified time: 2018-02-22 10:45:36
+# @Last Modified time: 2018-03-22 12:23:05
 from bs4 import BeautifulSoup
 
 import re
@@ -10,9 +10,13 @@ import requests
 import hashlib
 import random
 import hashlib
+import time, datetime
+from HTMLParser import HTMLParser
+from bs4 import BeautifulSoup
 
 from sredis import SRedis
 from logger import Logger
+from mongo import Mongo
 # from oss import Oss
 
 class Filter(object):
@@ -20,6 +24,7 @@ class Filter(object):
         self.config = config
         self.logger = Logger('filter', self.config.log.path)
         self.redis = SRedis(self.config, self.logger)
+        self.mongo = Mongo(self.config, self.logger)
         # self.oss = Oss(self.config, 'upload-html%d' % random.randint(1,10000))
 
     def filter_wx_article(self, html, encoding, title=None):
@@ -60,6 +65,96 @@ class Filter(object):
         html = re.sub('<span[\s\S]*?>', '<span>', html)
         if isinstance(html, unicode):
             html = html.encode(encoding)
+        return html
+
+    def filter_toutiao_article(self, html, encoding, title=None):
+        pattern = r'articleInfo: (\{[\s\S]+?\}),\s*?commentInfo'
+        need_data = re.search(pattern, html)
+        # html = html.decode(encoding)
+        if need_data is None:
+            return self.filter_different_toutiao_article(html, encoding, title)
+        else:
+            html = need_data.groups()[0].decode(encoding)
+            return self.filter_office_toutiao_article(html, encoding, title)
+
+    def filter_ifeng_article(self, html, encoding, md5, title=None):
+        html = re.sub('<script.*?>[\s\S]+?</script>', '', html)
+        html = re.sub('<style[\s\S]*?>[\s\S]+?</style>', '', html)
+        html = re.sub('<link.*?>', '', html)
+        html = re.sub('<iframe.*?>.*?</iframe>', '', html)
+        encoding = 'utf8'
+        if html.find('id="main_content"') != -1:
+            tree = BeautifulSoup(html, 'lxml')
+            title = tree.find('h1').text.encode(encoding)
+            original_time = re.search(r'(\d{4}年\d{2}月\d{2}日 \d{2}:\d{2}:\d{2})', html).groups()[0]
+            div = tree.find('div', id='main_content')
+            body = str(div)
+            html = '''
+            <html>
+                <head>
+                    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+                    <title>{}</title>
+                </head>
+                <body>
+                    <h1>{}</h1>
+                    <div>
+                        <div>
+                            <span>{}</span>
+                        </div>
+                        <div>
+                            {}
+                        </div>
+                    </div>
+                </body>
+            </html>'''.format(title, title, original_time, body)
+            return html
+        else:
+            collection = self.mongo.get_collection(collection='article_big_image')
+            self.mongo.remove(collection, {'content': md5})
+
+    def filter_office_toutiao_article(self, html, encoding, title):
+        title_pattern = r'title:\s*\'([\s\S]+?)\''
+        content_pattern = r'content:\s*\'([\s\S]+?)\''
+        subInfo_pattern = r'subInfo:\s*(\{([\s\S]+?)\})'
+        source_pattern = r'source:\s*\'([\s\S]+?)\''
+        time_pattern = r'time:\s*\'([\s\S]+?)\''
+
+        parser = HTMLParser()
+
+        title = re.search(title_pattern, html).groups()[0].encode('utf8')
+        content = re.search(content_pattern, html).groups()[0]
+        content = parser.unescape(content).encode('utf8')
+
+        subInfo = re.search(subInfo_pattern, html).groups()[0]
+        source = re.search(source_pattern, html).groups()[0].encode('utf8')
+        time_ = re.search(time_pattern, html).groups()[0]
+
+        collection = self.mongo.get_collection(collection='article_big_image')
+        upadte_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        timestamp = int(time.mktime(datetime.datetime.strptime(time_, '%Y-%m-%d %H:%M:%S').timetuple()))
+        self.mongo.update(collection, {'$set': {'update_at': upadte_time, 'original_time': timestamp}}, {'title': title})
+        store_html = '''<html>
+            <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+                <title>{}</title>
+            </head>
+            <body>
+                <h1>{}</h1>
+                <div>
+                    <div>
+                        <span>{}</span><span>{}</span>
+                    </div>
+                    <div>
+                        {}
+                    </div>
+                </div>
+            </body>
+        </html>'''.format(title, title, source, time_, content)
+
+        return store_html
+
+
+    def filter_different_toutiao_article(self, html, encoding, title):
         return html
 
     def get_img_name(self, img, type_):

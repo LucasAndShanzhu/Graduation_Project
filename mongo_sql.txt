@@ -10,8 +10,6 @@ db.article_big_image.insert({
     'url': '',                  //源url. 微信的可能失效.
     'content': '',              //存储在oss上页面的页面地址。
     'original_time': '',        //发表时间.
-    'province': '',             //省
-    'city': '',                 //市
     'like_num': 12,             //点赞数
     'real_like_num': 0,         //自己用户点赞数
     'read_num': 123,            //阅读数

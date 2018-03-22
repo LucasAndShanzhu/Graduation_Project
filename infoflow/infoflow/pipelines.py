@@ -31,7 +31,7 @@ class InfoflowPipeline(object):
             proxy = item['ip'] + ":" + item['port']
             self.redis.exec_redis("sadd", self.conf.pool.verify_pool, proxy)
 
-        elif spider_name in ('qingboWx', 'sougouWx', 'toutiao'):
+        elif spider_name in ('qingboWx', 'sougouWx', 'toutiao', 'ifeng'):
             collection = self.mongo.get_collection(collection='article_big_image')
             data = item.__dict__['_values']
             _id = self.getAutoIncId('article_big_image_id')
@@ -41,9 +41,14 @@ class InfoflowPipeline(object):
             data['show_num'] = 0
             data['click_num'] = 0
             timestamp = int(time.time())
-            key = "{}#{}#{}".format(data['title'], data['source'], timestamp)
+            key = "{}#{}".format(data['title'], data['source'], timestamp)
             content = md5(key).hexdigest() + ".html"
-            parse_data = "{}|wx|{}".format(content, data['url'])
+            article_source = 'wx'
+            if spider_name == 'toutiao':
+                article_source = 'toutiao'
+            elif spider_name == 'ifeng':
+                article_source = 'ifeng'
+            parse_data = "{}|{}|{}".format(content, article_source, data['url'])
             self.redis.exec_redis('sadd', 'need_parsed_html', parse_data)
             data['content'] = content
             result = self.mongo.find_one(collection, {'md5': data['md5']}, {"id": 1, "tag": 1})
@@ -61,6 +66,8 @@ class InfoflowPipeline(object):
                     tags.append(tag)
                     item_id = result['id']
                     self.mongo.update(collection, {'$set': {'tag': tags, 'update_at': self.get_current_time()}}, {'id': item_id})
+                if spider_name == 'toutiao':
+                    self.mongo.update(collection, {'$set': {'comment_num': data['comment_num'], 'update_at': self.get_current_time()}}, {'id': item_id})
         return item
 
     def get_current_time(self):

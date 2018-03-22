@@ -2,18 +2,11 @@
 # @Author: shanzhu
 # @Date:   2018-01-23 19:27:31
 # @Last Modified by:   shanzhu
-# @Last Modified time: 2018-02-23 15:08:44
-
-import sys, os
-import time
-path = os.getcwd() + '/..'
-sys.path.append(path)
+# @Last Modified time: 2018-03-19 21:08:27
 
 from selenium import webdriver
 from bs4 import BeautifulSoup
 from base64 import b64decode
-
-from ..util import util
 
 class ProxydbIpSpider(object):
     name = "proxydbIp"
@@ -32,7 +25,7 @@ class ProxydbIpSpider(object):
         self.logger = util.ulogger
 
     def start_requests(self):
-        for i in range(0, 7):
+        for i in range(0, 10):
             index = '&offset={}'.format(15 * i) if i != 0 else ''
             url = ProxydbIpSpider.BASE_URL.format(index)
             yield url
@@ -64,5 +57,10 @@ class ProxydbIpSpider(object):
             self.webdriver.quit()
 
 if __name__ == '__main__':
+    import sys, os
+    import time
+    path = os.getcwd() + '/..'
+    sys.path.append(path)
+    from util import util
     proxydb = ProxydbIpSpider()
     proxydb.run()

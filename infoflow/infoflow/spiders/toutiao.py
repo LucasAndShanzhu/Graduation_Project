@@ -2,7 +2,7 @@
 # @Author: shanzhu
 # @Date:   2018-02-22 19:28:11
 # @Last Modified by:   shanzhu
-# @Last Modified time: 2018-02-23 19:28:00
+# @Last Modified time: 2018-03-19 20:57:37
 
 import time, re
 import json
@@ -76,7 +76,6 @@ class ToutiaoSpider(BaseSpider):
             headers = self._get_headers(url)
             request = Request(url, callback=self.parse, errback=self._error_handle, headers=headers, dont_filter=True)
             yield request
-            break
 
     def _parse(self, html, url, encoding, status_code):
         tag_click = None
@@ -98,8 +97,8 @@ class ToutiaoSpider(BaseSpider):
                         chinese_tag = u'其他'.encode('utf8')
                     source = item['source'].encode('utf8')
                     title = item['title'].encode('utf8')
-                    comment_num = item['comments_count']
-                    url = ToutiaoSpider.URL_PREFIX + item['source_url']
+                    comment_num = item.get('comments_count', 0)
+                    item_url = ToutiaoSpider.URL_PREFIX + item['source_url']
                     behot_time = int(item['behot_time'])
                     cover = item.get('media_avatar_url', [])
                     if cover and not cover.startswith('https'):
@@ -111,8 +110,9 @@ class ToutiaoSpider(BaseSpider):
                     article_item['source'] = article_item['source_detail'] = source
                     article_item['channel'] = 'toutiao'
                     article_item['spider_source'] = 'toutiao_web'
-                    article_item['url'] = url
+                    article_item['url'] = item_url
                     article_item['comment_num'] = comment_num
+                    article_item['original_time'] = behot_time
                     article_item['tag'] = chinese_tag
                     key = "{}#{}".format(title, source)
                     md5_str = md5(key).hexdigest()
