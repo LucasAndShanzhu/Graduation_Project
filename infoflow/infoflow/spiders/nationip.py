@@ -2,7 +2,7 @@
 # @Author: shanzhu
 # @Date:   2018-01-23 17:34:01
 # @Last Modified by:   shanzhu
-# @Last Modified time: 2018-02-11 14:39:04
+# @Last Modified time: 2018-03-23 10:48:47
 import base64
 
 from scrapy.spiders import Rule
@@ -13,7 +13,6 @@ from bs4 import BeautifulSoup
 from ..util import util
 from .base import BaseSpider
 
-ulogger = util.ulogger
 conf = util.conf
 uredis = util.uredis
 

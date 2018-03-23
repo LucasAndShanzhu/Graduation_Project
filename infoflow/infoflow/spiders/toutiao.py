@@ -2,7 +2,7 @@
 # @Author: shanzhu
 # @Date:   2018-02-22 19:28:11
 # @Last Modified by:   shanzhu
-# @Last Modified time: 2018-03-19 20:57:37
+# @Last Modified time: 2018-03-23 10:49:23
 
 import time, re
 import json
@@ -15,7 +15,6 @@ from hashlib import md5
 from .base import BaseSpider
 from ..util import util
 
-ulogger = util.ulogger
 conf = util.conf
 uredis = util.uredis
 mysql = util.mysql
@@ -64,7 +63,6 @@ class ToutiaoSpider(BaseSpider):
             response_data = json.loads(html)
             return True
         except Exception as e:
-            ulogger.error()
             return False
 
     def _close(self):

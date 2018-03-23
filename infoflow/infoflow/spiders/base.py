@@ -2,7 +2,7 @@
 # @Author: shanzhu
 # @Date:   2018-01-23 12:16:17
 # @Last Modified by:   shanzhu
-# @Last Modified time: 2018-03-19 10:42:31
+# @Last Modified time: 2018-03-23 10:48:24
 import json
 
 from scrapy.spiders import CrawlSpider, Rule
@@ -15,7 +15,6 @@ from twisted.internet.error import TimeoutError, TCPTimedOutError
 
 from ..util import util
 
-ulogger = util.ulogger
 conf = util.conf
 uredis = util.uredis
 mysql = util.mysql
@@ -60,7 +59,6 @@ class BaseSpider(CrawlSpider):
         pass
 
     def _error_handle(self, failure):
-        ulogger.error(repr(failure))
         request = failure.request
         if failure.check(TimeoutError):
             url = request.url
@@ -80,7 +78,7 @@ class BaseSpider(CrawlSpider):
                 if not self.retry_nums.has_key(url):
                     self.retry_nums[url] = 0
                 if self.retry_nums[url] > 3:
-                    ulogger.error('{} is 500'.format(url))
+                    pass
                 else:
                     self.retry_nums[url] += 1
                     return Request(request.url, callback=self.parse, errback=self._error_handle, headers=self._get_headers(request.url), dont_filter=True)
@@ -91,7 +89,6 @@ class BaseSpider(CrawlSpider):
                 pass
         elif failure.check(DNSLookupError):
             url = failure.request.url
-            ulogger.error("{} get a DNS Lookup error".format(url))
 
     def parse(self, response):
         html = response.body

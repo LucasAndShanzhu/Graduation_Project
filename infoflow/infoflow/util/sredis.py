@@ -2,7 +2,7 @@
 # @Author: shanzhu
 # @Date:   2017-12-06 09:59:38
 # @Last Modified by:   shanzhu
-# @Last Modified time: 2018-01-23 17:32:51
+# @Last Modified time: 2018-03-23 10:47:33
 
 import redis
 import json
@@ -14,8 +14,7 @@ from config import Config
 from Signal import Signal
 
 class SRedis(object):
-    def __init__(self, config, logger):
-        self.logger = logger
+    def __init__(self, config):
         self.config = config
         self._link_redis()
 
@@ -53,21 +52,17 @@ class SRedis(object):
     def exec_redis(self, func, *args):
         func_obt = func if hasattr(func, '__call__') else getattr(self.redis, func)
         try:
-            # self.logger.write('redis ping, %d' % os.getpid())
             output = func_obt(*args)
             return output
         except AttributeError as e:
-            self.logger.error()
             Signal.signal(15)
         except(redis.exceptions.TimeoutError, redis.exceptions.ConnectionError):
-            self.logger.error()
             MailSender.send(u'redis-server is down, please to restart', u'redis-error')
             Signal.signal(15)
         except redis.exceptions.ResponseError as e:
             print repr(e)
             return None
         except Exception:
-            self.logger.error()
             Signal.signal(15)
         return None
 

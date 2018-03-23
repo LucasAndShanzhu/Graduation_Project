@@ -2,7 +2,7 @@
 # @Author: shanzhu
 # @Date:   2018-03-14 18:11:07
 # @Last Modified by:   shanzhu
-# @Last Modified time: 2018-03-21 20:00:31
+# @Last Modified time: 2018-03-23 10:49:30
 
 # 军事（滚动）:16874      /16874/1/list.shtml (第一页)     http://news.ifeng.com/listpage/
 # 古代史: 4764 同上      /16874/2/1/56638250(第一页最后一个元素坐标)/list.shtml     
@@ -42,7 +42,6 @@ from bs4 import BeautifulSoup
 from .base import BaseSpider
 from ..util import util
 
-ulogger = util.ulogger
 conf = util.conf
 uredis = util.uredis
 mysql = util.mysql

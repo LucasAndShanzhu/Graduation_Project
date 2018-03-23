@@ -2,9 +2,9 @@
 # @Author: shanzhu
 # @Date:   2017-12-26 10:12:06
 # @Last Modified by:   shanzhu
-# @Last Modified time: 2018-03-22 11:11:56
+# @Last Modified time: 2018-03-23 11:04:25
 import os
-dir_path = os.getcwd() + '/../common'
+dir_path = os.getcwd() + '/../infoflow/infoflow/util'
 import sys
 sys.path.append(dir_path)
 
@@ -14,6 +14,7 @@ import threading
 import time
 import random
 import multiprocessing
+from pymongo import MongoClient
 
 from oss import Oss
 from config import Config
@@ -23,6 +24,15 @@ redis_args = {
     'host': '127.0.0.1',
     'password': 'glx1997'
 }
+
+mongo_args = {
+    'host': '127.0.0.1',
+    'port': 27017,
+    'user': 'lucas',
+    'passwd': '863bbc7b3febf915dd417c6195f74686',
+    'database': 'item'
+}
+mongo_uri = "mongodb://{}:{}@{}:{}/{}".format(mongo_args['user'], mongo_args['passwd'], mongo_args['host'], mongo_args['port'], mongo_args['database'])
 
 redis = Redis(**redis_args)
 processes = []
@@ -52,6 +62,8 @@ def thread_run(config):
     html = redis.spop('need_parsed_html')
     oss = Oss(config, 'upload-html%d' % rand_num)
     s_filter = Filter(config)
+    mongodb = MongoClient(mongo_uri)
+    col = mongodb.item.article_big_image
     while True:
         if html is None:
             time.sleep(1)
@@ -81,6 +93,7 @@ def thread_run(config):
                 except Exception as e:
                     del oss
                     oss = Oss(config, 'upload-html%d' % rand_num)
+                    col.update({'content': html_parts[0]}, {'status_code': 0})
             except Exception as e:
                 print e
             finally:

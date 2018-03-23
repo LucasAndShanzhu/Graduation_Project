@@ -6,21 +6,19 @@
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 from util import util
-ulogger = util.ulogger
 conf = util.conf
 uredis = util.uredis
 mysql = util.util_mysql
 
 from hashlib import md5
-from .util import logger, sredis, mongo, util
+from .util import sredis, mongo, util
 import datetime, time
 
 class InfoflowPipeline(object):
     def __init__(self):
         self.conf = conf
-        self.logger = logger.Logger(self.conf.log.name, self.conf.log.path)
-        self.redis = sredis.SRedis(self.conf, self.logger)
-        self.mongo = mongo.Mongo(conf, ulogger)
+        self.redis = sredis.SRedis(self.conf)
+        self.mongo = mongo.Mongo(conf)
 
     def process_item(self, item, spider):
         if item is None or not item:
@@ -36,7 +34,7 @@ class InfoflowPipeline(object):
             data = item.__dict__['_values']
             _id = self.getAutoIncId('article_big_image_id')
             data['id'] = _id
-            data['status_code'] = 0
+            data['status_code'] = 1
             data['CTR'] = 0.0
             data['show_num'] = 0
             data['click_num'] = 0
@@ -81,7 +79,6 @@ class InfoflowPipeline(object):
             id_ = self.mongo.find_and_modify(collection, query, update)
             return id_['id']
         except Exception:
-            self.logger.error()
             return -1
 
     def close_spider(self, spider):

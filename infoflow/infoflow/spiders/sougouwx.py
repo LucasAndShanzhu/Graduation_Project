@@ -2,7 +2,7 @@
 # @Author: shanzhu
 # @Date:   2018-02-11 15:17:34
 # @Last Modified by:   shanzhu
-# @Last Modified time: 2018-03-19 14:18:02
+# @Last Modified time: 2018-03-23 10:49:27
 import base64
 import urllib, time, datetime
 import json, re, random
@@ -17,7 +17,6 @@ from infoflow.items import ArticleBigImageItem
 from ..util import util
 from .base import BaseSpider
 
-ulogger = util.ulogger
 conf = util.conf
 uredis = util.uredis
 mysql = util.util_mysql
@@ -100,7 +99,6 @@ class SougouWX(BaseSpider):
                 item['md5'] = md5_key
                 yield item
             except Exception as e:
-                ulogger.error()
                 yield None
 
     def _get_like_num(self, page):

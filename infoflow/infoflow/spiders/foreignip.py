@@ -2,7 +2,7 @@
 # @Author: shanzhu
 # @Date:   2018-01-22 20:46:28
 # @Last Modified by:   shanzhu
-# @Last Modified time: 2018-02-11 14:38:49
+# @Last Modified time: 2018-03-23 10:48:30
 
 import json
 import base64
@@ -16,7 +16,6 @@ from bs4 import BeautifulSoup
 from ..util import util
 from .base import BaseSpider
 
-ulogger = util.ulogger
 conf = util.conf
 uredis = util.uredis
 

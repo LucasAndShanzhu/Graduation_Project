@@ -6,7 +6,6 @@
 # https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 from util import util
 
-ulogger = util.ulogger
 conf = util.conf
 uredis = util.uredis
 
@@ -24,9 +23,7 @@ class ProxySpiderMiddleware(object):
         # middleware.
         if spider.need_proxy():
             ip = uredis.exec_redis('spop', conf.pool.pool)
-            ulogger.write(ip)
             if ip is None:
-                ulogger.error("%s need a ip, but get a None" % spider.name)
                 raise CloseSpider("ip is None, stop immediately")                
             request.meta['proxy'] = "http://" + ip
             uredis.exec_redis('sadd', conf.pool.verify_pool, ip)

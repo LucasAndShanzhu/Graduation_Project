@@ -2,7 +2,7 @@
 # @Author: shanzhu
 # @Date:   2018-01-23 19:27:31
 # @Last Modified by:   shanzhu
-# @Last Modified time: 2018-03-22 20:57:20
+# @Last Modified time: 2018-03-23 10:48:52
 
 from selenium import webdriver
 from bs4 import BeautifulSoup
@@ -23,7 +23,6 @@ class ProxydbIpSpider(object):
         self.webdriver.set_script_timeout(6)
         self.redis = util.uredis
         self.conf = util.conf
-        self.logger = util.ulogger
 
     def start_requests(self):
         for i in range(0, 10):

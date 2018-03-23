@@ -2,7 +2,7 @@
 # @Author: shanzhu
 # @Date:   2017-12-11 09:20:42
 # @Last Modified by:   shanzhu
-# @Last Modified time: 2018-03-22 20:34:11
+# @Last Modified time: 2018-03-23 10:47:58
 import os
 import pymysql
 import random
@@ -14,14 +14,12 @@ from selenium import webdriver
 
 from Signal import Signal
 from .config import Config
-from .logger import Logger
 from .sredis import SRedis
 from .mysql import Mysql
 
-conf = Config("/home/lucas/Graduation_Project/infoflow/infoflow/util/spider.ini")
-ulogger = Logger(conf.log.name, conf.log.path)
-uredis = SRedis(conf, ulogger)
-util_mysql = Mysql(conf, ulogger)
+conf = Config("/Users/gonglingxiao/Graduation_Project/infoflow/infoflow/util/spider.ini")
+uredis = SRedis(conf)
+util_mysql = Mysql(conf)
 util_mysql.connect()
 
 mysql = util_mysql
@@ -168,7 +166,7 @@ def get_topic(item_type):
             for item in result:
                 topic_table[item[0]] = item[1]
     except Exception as e:
-        ulogger.error()
+        pass
     finally:
         conn.close()
         return topic_table

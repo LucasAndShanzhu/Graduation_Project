@@ -2,7 +2,7 @@
 # @Author: shanzhu
 # @Date:   2018-01-26 19:06:31
 # @Last Modified by:   shanzhu
-# @Last Modified time: 2018-03-19 20:58:07
+# @Last Modified time: 2018-03-23 10:49:00
 
 import base64
 import urllib, time, datetime
@@ -18,7 +18,6 @@ from infoflow.items import ArticleBigImageItem
 from ..util import util
 from .base import BaseSpider
 
-ulogger = util.ulogger
 conf = util.conf
 uredis = util.uredis
 
@@ -137,7 +136,6 @@ class QingboWX(BaseSpider):
                     item = self._get_item(title, source, source_detail, item_url, original_time, province, city, like_num, read_num, tag, md5_key)
                     yield item
                 except Exception:
-                    ulogger.error()
                     yield None
                     
     def _get_item(self, title, source, source_detail, url, original_time, province, city, like_num, read_num, tag, md5):

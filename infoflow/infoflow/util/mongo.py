@@ -2,7 +2,7 @@
 # @Author: shanzhu
 # @Date:   2017-12-11 21:03:38
 # @Last Modified by:   shanzhu
-# @Last Modified time: 2018-02-08 21:04:23
+# @Last Modified time: 2018-03-23 10:45:42
 import pymongo
 from bson.objectid import ObjectId
 import time
@@ -15,9 +15,8 @@ class Mongo(object):
     ASC = pymongo.ASCENDING
     DESC = pymongo.DESCENDING
 
-    def __init__(self, config, logger):
+    def __init__(self, config):
         self.config = config
-        self.logger = logger
         self.link()
 
     def link(self):
@@ -36,7 +35,6 @@ class Mongo(object):
                 break
             except pymongo.errors.ServerSelectionTimeoutError:
                 if retry_num > 2:
-                    self.logger.error()
                     MailSender.send(u'mongo is timeout, please check', subject='mongo')
                     exit(-2)
                 retry_num += 1
@@ -75,10 +73,8 @@ class Mongo(object):
                     result = result.count()
                     return result
         except (pymongo.errors.OperationFailure, pymongo.errors.ServerSelectionTimeoutError):
-            self.logger.error()
             exit(-2)
         except Exception as e:
-            self.logger.error()
             exit(-2)
         else:
             output = []
@@ -98,7 +94,6 @@ class Mongo(object):
         try:
             result = collection.find_one(conditions, fields)
         except (pymongo.errors.OperationFailure, pymongo.errors.ServerSelectionTimeoutError):
-            self.logger.error()
             raise
         else:
             if result is None:
@@ -113,7 +108,6 @@ class Mongo(object):
             try:
                 _id = collection.insert_one(data)
             except (pymongo.errors.OperationFailure, pymongo.errors.ServerSelectionTimeoutError):
-                self.logger.error()
                 _id = None
             if _id:
                 break
@@ -130,7 +124,6 @@ class Mongo(object):
             collection.update(conditions, option)
             return True
         except (pymongo.errors.OperationFailure, pymongo.errors.ServerSelectionTimeoutError):
-            self.logger.error()
             return False
 
     def find_and_modify(self, collection, query, update_data):
@@ -145,7 +138,6 @@ class Mongo(object):
                 result['_id'] = str(result['_id'])
             return result
         except Exception:
-            self.logger.error()
             raise
 
     def remove(self, collection, conditions=None):
@@ -158,5 +150,4 @@ class Mongo(object):
             collection.remove(conditions)
             return True
         except (pymongo.errors.OperationFailure, pymongo.errors.ServerSelectionTimeoutError):
-            self.logger.error()
             return False

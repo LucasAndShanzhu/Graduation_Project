@@ -2,14 +2,13 @@
 # @Author: shanzhu
 # @Date:   2017-12-11 19:22:35
 # @Last Modified by:   shanzhu
-# @Last Modified time: 2018-02-23 19:22:18
+# @Last Modified time: 2018-03-23 10:46:05
 
 import pymysql
 
 class Mysql(object):
-    def __init__(self, config, logger=None):
+    def __init__(self, config):
         self.config = config
-        self.logger = logger
         self.conn = None
         self.cursor = None
 
@@ -49,7 +48,6 @@ class Mysql(object):
             if out == 0:
                 return []
         except Exception as e:
-            self.logger.error()
             return []
         return cursor.fetchone() if one else cursor.fetchall()
 
@@ -65,9 +63,7 @@ class Mysql(object):
                 cursor.execute(sql)
             conn.commit()
         except Exception as e:
-            self.logger.write(sql)
-            self.logger.write(data)
-            self.logger.error()
+            pass
 
     def get_db(self, database):
         if isinstance(database, str):
@@ -92,7 +88,6 @@ class Mysql(object):
             self.conn.close()
 
 if __name__ == '__main__':
-    from logger import Logger
     from config import Config
     config = Config('test.ini')
     log = Logger('test', config.log.path)
