@@ -17,7 +17,7 @@ from .config import Config
 from .sredis import SRedis
 from .mysql import Mysql
 
-conf = Config("/Users/gonglingxiao/Graduation_Project/infoflow/infoflow/util/spider.ini")
+conf = Config("/home/lucas/Graduation_Project/infoflow/infoflow/util/spider.ini")
 uredis = SRedis(conf)
 util_mysql = Mysql(conf)
 util_mysql.connect()

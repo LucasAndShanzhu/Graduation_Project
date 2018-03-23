@@ -130,7 +130,8 @@ class QingboWX(BaseSpider):
                     source = tag_wxarc[2][1:-1]
                     source_detail = util.get_utf8_str(tag_wxarc[3][1:-1], encoding)
                     original_time = tag_wxarc[4][1:-1]
-                    tag = QingboWX.TYPE_TAG_TABLE[item_type]
+                    #tag = QingboWX.TYPE_TAG_TABLE[item_type]
+                    tag = item_type
                     key = "{}#{}".format(title, source)
                     md5_key = md5(key).hexdigest()
                     item = self._get_item(title, source, source_detail, item_url, original_time, province, city, like_num, read_num, tag, md5_key)

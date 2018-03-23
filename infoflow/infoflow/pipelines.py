@@ -59,7 +59,7 @@ class InfoflowPipeline(object):
                 self.mongo.insert(collection, data)
             else:
                 tags = result['tag']
-                tag =  data['tag']
+                tag =  data['tag'].decode('utf8')
                 if tag not in tags:
                     tags.append(tag)
                     item_id = result['id']
