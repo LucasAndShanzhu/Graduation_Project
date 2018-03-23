@@ -15,5 +15,5 @@ do
     else
 		index=`expr $index + 1`
 	fi
-    sleep 120
+    sleep 60
 done
