@@ -2,8 +2,9 @@
 # @Author: shanzhu
 # @Date:   2018-01-23 12:16:17
 # @Last Modified by:   shanzhu
-# @Last Modified time: 2018-03-23 10:48:24
+# @Last Modified time: 2018-03-26 15:33:54
 import json
+import os, time
 
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.http import Request
@@ -22,8 +23,13 @@ mysql = util.mysql
 class BaseSpider(CrawlSpider):
     def __init__(self, *a, **kw):
         super(BaseSpider, self).__init__(*a, **kw)
+        uredis.exec_redis('set', '{}_pid'.format(self.name), os.getpid())
+        uredis.exec_redis('set', '{}_length'.format(self.name), self.LONGEST_TIME)
+        uredis.exec_redis('set', '{}_start'.format(self.name), int(time.time()))
         self.retry_nums = {}
         self.init()
+
+    LONGEST_TIME = 60
 
     #如果需要js操作设置返回true
     @staticmethod
@@ -113,3 +119,9 @@ class BaseSpider(CrawlSpider):
             self._close()
         except:
             pass
+        finally:
+            print '{}_pid'.format(self.name)
+            uredis.exec_redis('delete', '{}_pid'.format(self.name))
+            uredis.exec_redis('delete', '{}_length'.format(self.name))
+            uredis.exec_redis('delete', '{}_start'.format(self.name))
+
