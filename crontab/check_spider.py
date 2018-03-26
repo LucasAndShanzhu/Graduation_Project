@@ -2,7 +2,7 @@
 # @Author: shanzhu
 # @Date:   2018-03-26 15:46:41
 # @Last Modified by:   shanzhu
-# @Last Modified time: 2018-03-26 16:14:15
+# @Last Modified time: 2018-03-26 16:16:15
 import os, time
 from redis import Redis
 
@@ -22,8 +22,8 @@ while(True):
         length = int(redis.get(length_key))
         now = int(time.time())
         if start + length < now:
-            os.kill(int(redis.get(key_name)), 9)
-            redis.delete(key_name)
+            os.kill(int(redis.get(key)), 9)
+            redis.delete(key)
             redis.delete(length_key)
             redis.delete(start_key)
 
