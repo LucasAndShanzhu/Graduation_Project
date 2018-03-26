@@ -34,3 +34,4 @@ class Signal(object):
         if target < 0:
             target = os.getpid()
         os.kill(target, sig)
+

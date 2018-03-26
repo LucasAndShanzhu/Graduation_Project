@@ -1,2 +1,5 @@
 from scrapy.cmdline import execute
-execute()
+try:
+    execute()
+except:
+    pass

@@ -15,16 +15,14 @@ from HTMLParser import HTMLParser
 from bs4 import BeautifulSoup
 
 from sredis import SRedis
-from logger import Logger
 from mongo import Mongo
 # from oss import Oss
 
 class Filter(object):
     def __init__(self, config):
         self.config = config
-        self.logger = Logger('filter', self.config.log.path)
-        self.redis = SRedis(self.config, self.logger)
-        self.mongo = Mongo(self.config, self.logger)
+        self.redis = SRedis(self.config)
+        self.mongo = Mongo(self.config)
         # self.oss = Oss(self.config, 'upload-html%d' % random.randint(1,10000))
 
     def filter_wx_article(self, html, encoding, title=None):

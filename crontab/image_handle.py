@@ -11,7 +11,7 @@ import time
 import random
 import multiprocessing
 
-dir_path = os.getcwd() + '/../common'
+dir_path = os.getcwd() + '/../infoflow/infoflow/util'
 import sys
 sys.path.append(dir_path)
 
@@ -29,7 +29,7 @@ processes = []
 def run():
     global processes
     config = Config('setting.ini')
-    for i in range(2):
+    for i in range(4):
         process = multiprocessing.Process(target=process_run, args=(config,))
         processes.append(process)
         process.start()

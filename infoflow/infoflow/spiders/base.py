@@ -110,6 +110,6 @@ class BaseSpider(CrawlSpider):
     def closed(self, reason):
         try:
             mysql.close()
+            self._close()
         except:
             pass
-        self._close()

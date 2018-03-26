@@ -55,15 +55,17 @@ class SRedis(object):
             output = func_obt(*args)
             return output
         except AttributeError as e:
-            Signal.signal(15)
+            #Signal.signal(15)
+            pass
         except(redis.exceptions.TimeoutError, redis.exceptions.ConnectionError):
             MailSender.send(u'redis-server is down, please to restart', u'redis-error')
-            Signal.signal(15)
+            #Signal.signal(15)
         except redis.exceptions.ResponseError as e:
             print repr(e)
             return None
         except Exception:
-            Signal.signal(15)
+            #Signal.signal(15)
+            pass
         return None
 
 if __name__ == '__main__':
