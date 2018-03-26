@@ -29,6 +29,7 @@ class QingboWX(BaseSpider):
 
     TAG_WXARC = r'tag_wxarc\((.*?)\)'
     download_delay = 4
+    LONGEST_TIME = 600
 
     LOGIN_DATA = {
         'username': 18007383655,
