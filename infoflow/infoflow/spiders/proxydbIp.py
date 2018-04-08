@@ -44,6 +44,7 @@ class ProxydbIpSpider(object):
         div = tree.find('div', class_='table-responsive')
         tbody = div.find('tbody')
         tr_list = tbody.find_all('tr')
+        print len(tr_list)
         for tr in tr_list:
             td = tr.find('td')
             ip_a = td.find('a')
@@ -53,6 +54,7 @@ class ProxydbIpSpider(object):
     def run(self):
         try:
             for url in self.start_requests():
+                print url
                 html = self.get_html(url)
                 self.parse(html)
                 time.sleep(ProxydbIpSpider.SLEEP_TIME)
@@ -65,6 +67,7 @@ if __name__ == '__main__':
     import sys, os
     import time
     path = os.getcwd() + '/..'
+    print path
     sys.path.append(path)
     from util import util
     proxydb = ProxydbIpSpider()

@@ -55,7 +55,7 @@ class IFengSpider(BaseSpider):
     }
 
     name = 'ifeng'
-    LONGEST_TIME = 600
+    LONGEST_TIME = 1800
 
     FLAG_TABLE = { 
         'news': [16874, 4763, 4764, 4765], 

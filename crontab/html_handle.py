@@ -90,10 +90,10 @@ def thread_run(config):
                     html_content = s_filter.filter_ifeng_article(html_content, html_encoding, html_parts[0])
                 try:
                     oss.upload('spider-lucas', html_name, html_content)
+                    col.update({'content': html_parts[0]}, {'$set': {'status_code': 0}})
                 except Exception as e:
                     del oss
                     oss = Oss(config, 'upload-html%d' % rand_num)
-                    col.update({'content': html_parts[0]}, {'status_code': 0})
             except Exception as e:
                 print e
             finally:

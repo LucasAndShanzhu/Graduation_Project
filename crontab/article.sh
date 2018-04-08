@@ -1,7 +1,4 @@
 #!/usr/bin/bash
-
-while true
-do
-    cd /home/lucas/Graduation_Project/spider && python run.py sougouweixin
-	sleep 120
-done
+cd /home/lucas/Graduation_Project/infoflow/ && python run.py crawl ifeng
+cd /home/lucas/Graduation_Project/infoflow/ && python run.py crawl sougouWx
+cd /home/lucas/Graduation_Project/infoflow/ && python run.py crawl qingboWx 

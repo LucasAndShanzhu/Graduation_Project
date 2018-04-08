@@ -1,0 +1,708 @@
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/threading.py", line 812, in __bootstrap_inner
+    self.run()
+  File "/usr/lib64/python2.7/threading.py", line 765, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "test_proxy.py", line 28, in test_proxy
+    proxy = redis.spop('need_test_ip')
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 1646, in spop
+    return self.execute_command('SPOP', name)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 668, in execute_command
+    return self.parse_response(connection, command_name, **options)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 680, in parse_response
+    response = connection.read_response()
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 629, in read_response
+    raise response
+ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+Exception in thread Thread-2:
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/threading.py", line 812, in __bootstrap_inner
+    self.run()
+  File "/usr/lib64/python2.7/threading.py", line 765, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "html_handle.py", line 70, in thread_run
+    html = redis.spop('need_parsed_html')
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 1646, in spop
+    return self.execute_command('SPOP', name)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 668, in execute_command
+    return self.parse_response(connection, command_name, **options)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 680, in parse_response
+    response = connection.read_response()
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 629, in read_response
+    raise response
+ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+Exception in thread Thread-2:
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/threading.py", line 812, in __bootstrap_inner
+    self.run()
+  File "/usr/lib64/python2.7/threading.py", line 765, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "html_handle.py", line 70, in thread_run
+    html = redis.spop('need_parsed_html')
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 1646, in spop
+    return self.execute_command('SPOP', name)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 668, in execute_command
+    return self.parse_response(connection, command_name, **options)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 680, in parse_response
+    response = connection.read_response()
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 629, in read_response
+    raise response
+ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/threading.py", line 812, in __bootstrap_inner
+    self.run()
+  File "/usr/lib64/python2.7/threading.py", line 765, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "html_handle.py", line 70, in thread_run
+    html = redis.spop('need_parsed_html')
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 1646, in spop
+    return self.execute_command('SPOP', name)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 668, in execute_command
+    return self.parse_response(connection, command_name, **options)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 680, in parse_response
+    response = connection.read_response()
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 629, in read_response
+    raise response
+ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/threading.py", line 812, in __bootstrap_inner
+    self.run()
+  File "/usr/lib64/python2.7/threading.py", line 765, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "html_handle.py", line 70, in thread_run
+    html = redis.spop('need_parsed_html')
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 1646, in spop
+    return self.execute_command('SPOP', name)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 668, in execute_command
+    return self.parse_response(connection, command_name, **options)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 680, in parse_response
+    response = connection.read_response()
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 629, in read_response
+    raise response
+ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+Exception in thread Thread-4:
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/threading.py", line 812, in __bootstrap_inner
+    self.run()
+  File "/usr/lib64/python2.7/threading.py", line 765, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "html_handle.py", line 70, in thread_run
+    html = redis.spop('need_parsed_html')
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 1646, in spop
+    return self.execute_command('SPOP', name)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 668, in execute_command
+    return self.parse_response(connection, command_name, **options)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 680, in parse_response
+    response = connection.read_response()
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 629, in read_response
+    raise response
+ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+Exception in thread Thread-4:
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/threading.py", line 812, in __bootstrap_inner
+    self.run()
+  File "/usr/lib64/python2.7/threading.py", line 765, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "html_handle.py", line 70, in thread_run
+    html = redis.spop('need_parsed_html')
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 1646, in spop
+    return self.execute_command('SPOP', name)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 668, in execute_command
+    return self.parse_response(connection, command_name, **options)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 680, in parse_response
+    response = connection.read_response()
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 629, in read_response
+    raise response
+ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+Exception in thread Thread-3:
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/threading.py", line 812, in __bootstrap_inner
+    self.run()
+  File "/usr/lib64/python2.7/threading.py", line 765, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "html_handle.py", line 70, in thread_run
+    html = redis.spop('need_parsed_html')
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 1646, in spop
+    return self.execute_command('SPOP', name)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 668, in execute_command
+    return self.parse_response(connection, command_name, **options)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 680, in parse_response
+    response = connection.read_response()
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 629, in read_response
+    raise response
+ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+Exception in thread Thread-3:
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/threading.py", line 812, in __bootstrap_inner
+    self.run()
+  File "/usr/lib64/python2.7/threading.py", line 765, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "html_handle.py", line 70, in thread_run
+    html = redis.spop('need_parsed_html')
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 1646, in spop
+    return self.execute_command('SPOP', name)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 668, in execute_command
+    return self.parse_response(connection, command_name, **options)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 680, in parse_response
+    response = connection.read_response()
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 629, in read_response
+    raise response
+ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/threading.py", line 812, in __bootstrap_inner
+    self.run()
+  File "/usr/lib64/python2.7/threading.py", line 765, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "test_proxy.py", line 28, in test_proxy
+    proxy = redis.spop('need_test_ip')
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 1646, in spop
+    return self.execute_command('SPOP', name)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 668, in execute_command
+    return self.parse_response(connection, command_name, **options)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 680, in parse_response
+    response = connection.read_response()
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 629, in read_response
+    raise response
+ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+Exception in thread Thread-3:
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/threading.py", line 812, in __bootstrap_inner
+    self.run()
+  File "/usr/lib64/python2.7/threading.py", line 765, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "test_proxy.py", line 28, in test_proxy
+    proxy = redis.spop('need_test_ip')
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 1646, in spop
+    return self.execute_command('SPOP', name)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 668, in execute_command
+    return self.parse_response(connection, command_name, **options)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 680, in parse_response
+    response = connection.read_response()
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 629, in read_response
+    raise response
+ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+Exception in thread Thread-4:
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/threading.py", line 812, in __bootstrap_inner
+    self.run()
+  File "/usr/lib64/python2.7/threading.py", line 765, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "test_proxy.py", line 28, in test_proxy
+    proxy = redis.spop('need_test_ip')
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 1646, in spop
+    return self.execute_command('SPOP', name)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 668, in execute_command
+    return self.parse_response(connection, command_name, **options)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 680, in parse_response
+    response = connection.read_response()
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 629, in read_response
+    raise response
+ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+Exception in thread Thread-2:
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/threading.py", line 812, in __bootstrap_inner
+    self.run()
+  File "/usr/lib64/python2.7/threading.py", line 765, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "test_proxy.py", line 28, in test_proxy
+    proxy = redis.spop('need_test_ip')
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 1646, in spop
+    return self.execute_command('SPOP', name)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 668, in execute_command
+    return self.parse_response(connection, command_name, **options)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 680, in parse_response
+    response = connection.read_response()
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 629, in read_response
+    raise response
+ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+Exception in thread Thread-3:
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/threading.py", line 812, in __bootstrap_inner
+    self.run()
+  File "/usr/lib64/python2.7/threading.py", line 765, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "test_proxy.py", line 28, in test_proxy
+    proxy = redis.spop('need_test_ip')
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 1646, in spop
+    return self.execute_command('SPOP', name)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 668, in execute_command
+    return self.parse_response(connection, command_name, **options)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 680, in parse_response
+    response = connection.read_response()
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 629, in read_response
+    raise response
+ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+Exception in thread Thread-2:
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/threading.py", line 812, in __bootstrap_inner
+    self.run()
+  File "/usr/lib64/python2.7/threading.py", line 765, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "test_proxy.py", line 28, in test_proxy
+    proxy = redis.spop('need_test_ip')
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 1646, in spop
+    return self.execute_command('SPOP', name)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 668, in execute_command
+    return self.parse_response(connection, command_name, **options)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 680, in parse_response
+    response = connection.read_response()
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 629, in read_response
+    raise response
+ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+35.198.103.196:3128 start test
+125.118.245.101:6666 start test
+178.62.92.251:8080 start test
+110.154.210.8:61202 start test
+110.154.210.8:61202  is don't work
+71.14.144.36:8080 start test
+35.198.103.196:3128  is don't work
+171.38.43.121:8123 start test
+125.118.245.101:6666  is don't work
+178.62.92.251:8080  is don't work
+41.170.89.54:8080 start test
+119.28.87.36:80 start test
+119.28.87.36:80  is don't work
+122.55.253.157:3128 start test
+171.38.43.121:8123  is don't work
+183.189.227.118:8118 start test
+183.189.227.118:8118  is don't work
+115.213.203.143:3128 start test
+115.213.203.143:3128  is don't work
+139.59.21.37:3128 start test
+71.14.144.36:8080  is don't work
+177.136.252.7:3128 start test
+221.7.255.168:8080 start test
+113.105.200.114:3128 start test
+125.108.65.220:61202 start test
+125.108.65.220:61202  is don't work
+189.84.211.98:8080 start test
+41.170.89.54:8080  is don't work
+14.118.254.182:6666 start test
+177.136.252.7:3128  is don't work
+62.231.245.5:8080 start test
+189.84.211.98:8080  is don't work
+180.118.243.131:61234 start test
+113.105.200.114:3128  is don't work
+119.28.37.58:80 start test
+119.28.37.58:80  is don't work
+27.210.66.81:61202 start test
+188.211.226.118:53281 start test
+14.118.254.182:6666  is don't work
+74.208.163.28:3128 start test
+74.208.163.28:3128  is don't work
+122.230.249.111:8010 start test
+122.230.249.111:8010  is don't work
+223.220.158.58:8060 start test
+180.118.243.131:61234  is don't work
+194.182.74.151:3128 start test
+27.210.66.81:61202  is don't work
+122.72.18.60:80 start test
+122.72.18.60:80  is don't work
+122.216.120.253:80 start test
+188.211.226.118:53281  is don't work
+123.53.86.98:61234 start test
+223.220.158.58:8060  is don't work
+183.52.104.180:41138 start test
+194.182.74.151:3128  is don't work
+5.9.78.28:3128 start test
+122.216.120.253:80  is don't work
+168.228.185.51:8080 start test
+123.53.86.98:61234  is don't work
+42.122.17.254:61202 start test
+42.122.17.254:61202  is don't work
+221.10.69.241:61202 start test
+183.52.104.180:41138  is don't work
+144.217.204.254:3128 start test
+212.237.37.152:8888 start test
+168.228.185.51:8080  is don't work
+221.10.69.241:61202  is don't work
+Exception in thread Thread-4:
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/threading.py", line 812, in __bootstrap_inner
+    self.run()
+  File "/usr/lib64/python2.7/threading.py", line 765, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "test_proxy.py", line 28, in test_proxy
+    proxy = redis.spop('need_test_ip')
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 1646, in spop
+    return self.execute_command('SPOP', name)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 668, in execute_command
+    return self.parse_response(connection, command_name, **options)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 680, in parse_response
+    response = connection.read_response()
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 629, in read_response
+    raise response
+ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+213.169.158.34:8080 start test
+81.36.204.220:8080 start test
+122.72.18.35:80 start test
+115.231.9.69:8888 start test
+119.81.197.124:3128 start test
+81.36.204.220:8080  is don't work
+61.4.184.180:3128 start test
+115.231.9.69:8888  is don't work
+188.166.177.114:3128 start test
+165.227.207.215:8080 start test
+119.81.197.124:3128  is don't work
+113.128.9.84:49365 start test
+213.169.158.34:8080  is don't work
+114.228.74.107:6666 start test
+165.227.207.215:8080  is don't work
+159.65.110.167:3128 start test
+113.128.9.84:49365  is don't work
+128.199.179.106:8080 start test
+114.228.74.107:6666  is don't work
+113.121.243.234:61234 start test
+113.121.243.234:61234  is don't work
+14.29.47.90:3128 start test
+123.57.76.102:80 start test
+123.57.76.102:80  is don't work
+175.149.96.7:61202 start test
+64.137.236.54:3128 start test
+122.72.18.34:80 start test
+180.76.177.162:3128 start test
+177.67.83.134:80 start test
+175.149.96.7:61202  is don't work
+114.239.110.160:34649 start test
+64.137.236.54:3128  is don't work
+115.127.68.66:8080 start test
+180.76.177.162:3128  is don't work
+124.40.252.2:3128 start test
+177.67.83.134:80  is don't work
+106.2.239.0:80 start test
+114.239.110.160:34649  is don't work
+14.139.189.212:3128 start test
+117.69.41.185:61202 start test
+115.127.68.66:8080  is don't work
+113.207.44.70:3128 start test
+180.118.243.210:808 start test
+106.2.239.0:80  is don't work
+14.139.189.212:3128  is don't work
+117.69.41.185:61202  is don't work
+180.118.243.210:808  is don't work
+Exception in thread Thread-4:
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/threading.py", line 812, in __bootstrap_inner
+    self.run()
+  File "/usr/lib64/python2.7/threading.py", line 765, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "image_handle.py", line 56, in thread_run
+    image = redis.spop('need_handle_image')
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 1646, in spop
+    return self.execute_command('SPOP', name)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 668, in execute_command
+    return self.parse_response(connection, command_name, **options)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 680, in parse_response
+    response = connection.read_response()
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 629, in read_response
+    raise response
+ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/threading.py", line 812, in __bootstrap_inner
+    self.run()
+  File "/usr/lib64/python2.7/threading.py", line 765, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "image_handle.py", line 56, in thread_run
+    image = redis.spop('need_handle_image')
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 1646, in spop
+    return self.execute_command('SPOP', name)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 668, in execute_command
+    return self.parse_response(connection, command_name, **options)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 680, in parse_response
+    response = connection.read_response()
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 629, in read_response
+    raise response
+ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/threading.py", line 812, in __bootstrap_inner
+    self.run()
+  File "/usr/lib64/python2.7/threading.py", line 765, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "image_handle.py", line 56, in thread_run
+    image = redis.spop('need_handle_image')
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 1646, in spop
+    return self.execute_command('SPOP', name)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 668, in execute_command
+    return self.parse_response(connection, command_name, **options)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 680, in parse_response
+    response = connection.read_response()
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 629, in read_response
+    raise response
+ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+Exception in thread Thread-2:
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/threading.py", line 812, in __bootstrap_inner
+    self.run()
+  File "/usr/lib64/python2.7/threading.py", line 765, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "image_handle.py", line 56, in thread_run
+    image = redis.spop('need_handle_image')
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 1646, in spop
+    return self.execute_command('SPOP', name)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 668, in execute_command
+    return self.parse_response(connection, command_name, **options)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 680, in parse_response
+    response = connection.read_response()
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 629, in read_response
+    raise response
+ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/threading.py", line 812, in __bootstrap_inner
+    self.run()
+  File "/usr/lib64/python2.7/threading.py", line 765, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "image_handle.py", line 56, in thread_run
+    image = redis.spop('need_handle_image')
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 1646, in spop
+    return self.execute_command('SPOP', name)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 668, in execute_command
+    return self.parse_response(connection, command_name, **options)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 680, in parse_response
+    response = connection.read_response()
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 629, in read_response
+    raise response
+ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+Exception in thread Thread-2:
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/threading.py", line 812, in __bootstrap_inner
+    self.run()
+  File "/usr/lib64/python2.7/threading.py", line 765, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "image_handle.py", line 56, in thread_run
+    image = redis.spop('need_handle_image')
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 1646, in spop
+    return self.execute_command('SPOP', name)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 668, in execute_command
+    return self.parse_response(connection, command_name, **options)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 680, in parse_response
+    response = connection.read_response()
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 629, in read_response
+    raise response
+ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+Exception in thread Thread-2:
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/threading.py", line 812, in __bootstrap_inner
+    self.run()
+  File "/usr/lib64/python2.7/threading.py", line 765, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "image_handle.py", line 56, in thread_run
+    image = redis.spop('need_handle_image')
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 1646, in spop
+    return self.execute_command('SPOP', name)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 668, in execute_command
+    return self.parse_response(connection, command_name, **options)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 680, in parse_response
+    response = connection.read_response()
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 629, in read_response
+    raise response
+ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/threading.py", line 812, in __bootstrap_inner
+    self.run()
+  File "/usr/lib64/python2.7/threading.py", line 765, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "image_handle.py", line 56, in thread_run
+    image = redis.spop('need_handle_image')
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 1646, in spop
+    return self.execute_command('SPOP', name)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 668, in execute_command
+    return self.parse_response(connection, command_name, **options)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 680, in parse_response
+    response = connection.read_response()
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 629, in read_response
+    raise response
+ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+Exception in thread Thread-2:
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/threading.py", line 812, in __bootstrap_inner
+    self.run()
+  File "/usr/lib64/python2.7/threading.py", line 765, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "image_handle.py", line 56, in thread_run
+    image = redis.spop('need_handle_image')
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 1646, in spop
+    return self.execute_command('SPOP', name)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 668, in execute_command
+    return self.parse_response(connection, command_name, **options)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 680, in parse_response
+    response = connection.read_response()
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 629, in read_response
+    raise response
+ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+Exception in thread Thread-3:
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/threading.py", line 812, in __bootstrap_inner
+    self.run()
+  File "/usr/lib64/python2.7/threading.py", line 765, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "image_handle.py", line 56, in thread_run
+    image = redis.spop('need_handle_image')
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 1646, in spop
+    return self.execute_command('SPOP', name)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 668, in execute_command
+    return self.parse_response(connection, command_name, **options)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 680, in parse_response
+    response = connection.read_response()
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 629, in read_response
+    raise response
+ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+Exception in thread Thread-3:
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/threading.py", line 812, in __bootstrap_inner
+    self.run()
+  File "/usr/lib64/python2.7/threading.py", line 765, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "image_handle.py", line 56, in thread_run
+    image = redis.spop('need_handle_image')
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 1646, in spop
+    return self.execute_command('SPOP', name)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 668, in execute_command
+    return self.parse_response(connection, command_name, **options)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 680, in parse_response
+    response = connection.read_response()
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 629, in read_response
+    raise response
+ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+Exception in thread Thread-3:
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/threading.py", line 812, in __bootstrap_inner
+    self.run()
+  File "/usr/lib64/python2.7/threading.py", line 765, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "image_handle.py", line 56, in thread_run
+    image = redis.spop('need_handle_image')
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 1646, in spop
+    return self.execute_command('SPOP', name)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 668, in execute_command
+    return self.parse_response(connection, command_name, **options)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 680, in parse_response
+    response = connection.read_response()
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 629, in read_response
+    raise response
+ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+Exception in thread Thread-3:
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/threading.py", line 812, in __bootstrap_inner
+    self.run()
+  File "/usr/lib64/python2.7/threading.py", line 765, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "image_handle.py", line 56, in thread_run
+    image = redis.spop('need_handle_image')
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 1646, in spop
+    return self.execute_command('SPOP', name)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 668, in execute_command
+    return self.parse_response(connection, command_name, **options)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 680, in parse_response
+    response = connection.read_response()
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 629, in read_response
+    raise response
+ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+Exception in thread Thread-4:
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/threading.py", line 812, in __bootstrap_inner
+    self.run()
+  File "/usr/lib64/python2.7/threading.py", line 765, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "image_handle.py", line 56, in thread_run
+    image = redis.spop('need_handle_image')
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 1646, in spop
+    return self.execute_command('SPOP', name)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 668, in execute_command
+    return self.parse_response(connection, command_name, **options)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 680, in parse_response
+    response = connection.read_response()
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 629, in read_response
+    raise response
+ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+Exception in thread Thread-4:
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/threading.py", line 812, in __bootstrap_inner
+    self.run()
+  File "/usr/lib64/python2.7/threading.py", line 765, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "image_handle.py", line 56, in thread_run
+    image = redis.spop('need_handle_image')
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 1646, in spop
+    return self.execute_command('SPOP', name)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 668, in execute_command
+    return self.parse_response(connection, command_name, **options)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 680, in parse_response
+    response = connection.read_response()
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 629, in read_response
+    raise response
+ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+Exception in thread Thread-4:
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/threading.py", line 812, in __bootstrap_inner
+    self.run()
+  File "/usr/lib64/python2.7/threading.py", line 765, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "image_handle.py", line 56, in thread_run
+    image = redis.spop('need_handle_image')
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 1646, in spop
+    return self.execute_command('SPOP', name)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 668, in execute_command
+    return self.parse_response(connection, command_name, **options)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 680, in parse_response
+    response = connection.read_response()
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 629, in read_response
+    raise response
+ResponseError: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
+
+Traceback (most recent call last):
+  File "check_spider.py", line 16, in <module>
+    keys = redis.keys('*_pid')
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 1032, in keys
+    return self.execute_command('KEYS', pattern)
+  File "/usr/lib/python2.7/site-packages/redis/client.py", line 673, in execute_command
+    connection.send_command(*args)
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 610, in send_command
+    self.send_packed_command(self.pack_command(*args))
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 585, in send_packed_command
+    self.connect()
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 493, in connect
+    self.on_connect()
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 561, in on_connect
+    if nativestr(self.read_response()) != 'OK':
+  File "/usr/lib/python2.7/site-packages/redis/connection.py", line 629, in read_response
+    raise response
+redis.exceptions.ResponseError: Client sent AUTH, but no password is set
