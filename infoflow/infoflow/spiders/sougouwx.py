@@ -25,7 +25,7 @@ class SougouWX(BaseSpider):
     name = "sougouWx"
     VERIFY = '<div class="img-box">'
     download_delay = 4
-    LONGEST_TIME = 6000
+    LONGEST_TIME = 1800
 
     Cookie = util.get_cookie('https://www.sogou.com/web?query=')
     BASE_URL = 'http://weixin.sogou.com/pcindex/pc/pc_{}/{}.html'
