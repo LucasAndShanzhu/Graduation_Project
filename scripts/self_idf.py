@@ -2,7 +2,7 @@
 # @Author: shanzhu
 # @Date:   2018-03-21 20:11:38
 # @Last Modified by:   shanzhu
-# @Last Modified time: 2018-03-22 14:59:26
+# @Last Modified time: 2018-04-09 10:39:38
 # 
 # 获取自定义的idf-反词频文档.
 
@@ -20,10 +20,10 @@ redis_args = {
     'password': 'glx1997'
 }
 
-import sys, os
+import sys, os, time
 path = os.getcwd()
 chs_dict_path = 'webdict_with_freq.txt'
-jieba.load_userdict(path + '/' + chs_dict_path)
+jieba.load_userdict(path + '/../' + chs_dict_path)
 
 mongo_args = {
     'host': '127.0.0.1',
@@ -80,7 +80,7 @@ def url_process():
     mongodb = MongoClient(mongo_uri)
     redis = Redis(**redis_args)
     collection = mongodb[mongo_args['database']]['article_big_image']
-    content_cursor = collection.find({}, {'content': 1})
+    content_cursor = collection.find({'status_code': 0}, {'content': 1})
     redis.set('idf_handle', 'start')
     for content in content_cursor:
         url = oss_prefix + content['content']
@@ -95,7 +95,9 @@ def process_run():
         if not url:
             if redis.get('idf_handle') != 'start':
                 return
-        idf.run(url)
+        else:
+            idf.run(url)
+        time.sleep(1)
 
 def quit(*args):
     global processes
@@ -105,6 +107,18 @@ def quit(*args):
                 os.kill(process.pid, 9)
         except Exception as e:
             pass
+
+def handle_idf_txt():
+    path = os.getcwd() + '/../idf.txt'
+    file = open(path, 'w')
+    redis = Redis(**redis_args)
+    word_cursor = redis.hscan_iter('word_count') 
+    for word_tuple in word_cursor:
+        word = word_tuple[0]
+        value = int(word_tuple[1])
+        if not all(ord(c) < 128 for c in word):
+            file.write("{} {}\n".format(word, value))
+    redis.delete('word_count')
 
 processes = []
 def run():
@@ -119,6 +133,7 @@ def run():
     signal.signal(signal.SIGTERM, quit)
     for p in processes:
         p.join()
+    handle_idf_txt()
 
 if __name__ == '__main__':
     run()
