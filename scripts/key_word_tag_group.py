@@ -2,7 +2,7 @@
 # @Author: shanzhu
 # @Date:   2018-03-27 10:22:44
 # @Last Modified by:   shanzhu
-# @Last Modified time: 2018-03-27 14:43:33
+# @Last Modified time: 2018-04-09 12:33:15
 from pymongo import MongoClient
 import numpy as np
 
@@ -88,11 +88,12 @@ def accurate_value(matrix, count_matrix, key_list, tag_list, connect):
         line_m = matrix[x, : ]
         count_list = count_matrix[x, : ].tolist()
         temp_count_m = np.mat(np.diag(count_list))
-        value_m = count_list * temp_count_m
+        value_m = line_m * temp_count_m
         pos = np.argmax(value_m)
+        value = value_m[pos]
         key = key_list[x]
         tag = tag_list[pos]
-        sql = "insert into key_tag_table(key_word, tag) values('{}', '{}')".format(key, tag)
+        sql = "insert into key_tag_table(key_word, tag, value) values('{}', '{}', {})".format(key, tag, value)
         cursor.execute(sql)
     connect.commit()
 
