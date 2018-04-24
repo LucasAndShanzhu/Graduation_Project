@@ -2,7 +2,7 @@
 # @Author: shanzhu
 # @Date:   2018-03-21 20:11:38
 # @Last Modified by:   shanzhu
-# @Last Modified time: 2018-04-09 10:39:38
+# @Last Modified time: 2018-04-09 11:33:09
 # 
 # 获取自定义的idf-反词频文档.
 
@@ -35,7 +35,6 @@ mongo_args = {
 
 mongo_uri = "mongodb://{}:{}@{}:{}/{}".format(mongo_args['user'], mongo_args['passwd'], mongo_args['host'], mongo_args['port'], mongo_args['database'])
 oss_prefix = 'https://spider-lucas.oss-cn-beijing.aliyuncs.com/html/'
-jieba.load_userdict
 
 
 class Idf(object):
