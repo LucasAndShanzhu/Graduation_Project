@@ -1,0 +1,36 @@
+OSS: 
+
+AssID: LTAIb3pdrzeHfd8M
+secret: cVCxNcN24OnukCN8YWDDtZlfmXfCjV
+RoleArn: acs:ram::1237710105971084:role/aliyunosstokengeneratorrole
+RoleSessionName: external-username
+DurationSeconds: 3600
+
+Spider 
+ID: LTAIeRZlTb28xlCX
+Key: 8aMM7oUhDfMflk6ZVFqHCmDC4lP1Ej
+RoleArn: acs:ram::1237710105971084:role/spider
+
+阿里云:
+猫与鱼_lucas  GlX1997
+服务器地址: 120.79.32.91
+
+
+github:
+LucasAndShanzhu
+glx1997 or Glx1997
+
+ssh: SHA256:LId7DZOX0iRjlEZ4b3q3Ly13wCGz7RRW3jirp7mF6LA 
+lucasandshanzhu@yeah.net
+
+yeah.net:
+lucasandshanzhu@yeah.net
+glx1997
+
+
+不知名的密码：
+name: lucas92202
+Pwd: SSdut199701113155
+
+Registered Name:https://zhile.io
+License Key: 48891cf209c6d32bf4
