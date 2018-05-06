@@ -1,0 +1,22 @@
+推荐算法:
+基于用户画像推荐.
+Apriori算法
+FP-growth算法
+slope-one推荐算法
+
+引用：
+使用Apriori算法和FP-growth算法进行关联分析 https://www.cnblogs.com/qwertWZ/p/4510857.html
+基于用户画像的推荐算法实现 http://www.hongweipeng.com/index.php/archives/669/
+
+用户进行聚类分层.
+CTR -> 文章质量.
+
+标签库
+内容特征化
+用户特征化
+隐语义推荐
+相关引用：https://yq.aliyun.com/articles/465265
+
+word2vec:
+引用: https://zhuanlan.zhihu.com/p/26306795
+https://www.cnblogs.com/peghoty/p/3857839.html
