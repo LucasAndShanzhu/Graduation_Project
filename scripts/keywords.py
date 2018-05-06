@@ -15,7 +15,7 @@ from pymongo import MongoClient
 path = os.getcwd()
 chs_dict_path = 'webdict_with_freq.txt'
 idf_txt = path + '/../idf.txt'
-jieba.load_userdict(path + '/' + chs_dict_path)
+jieba.load_userdict(idf_txt)
 
 jieba.analyse.set_idf_path(idf_txt)
 mongo_args = {
