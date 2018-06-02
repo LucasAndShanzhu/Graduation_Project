@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, session, redirect, url_for
 
-from common import mysql, mongo, redis
+from common import mysql, mongo, sredis
 from config import getConfig
 
 def createApp(env="default"):
