@@ -4,12 +4,12 @@ import multiprocessing
 from bson import ObjectId
 
 from application import app
-from ..common import mysql, redis, mongo, util
+from ..common import mysql, sredis, mongo, util
 
 class RecommendApi(object):
     def __init__(self):
         self.mysqlUtil = mysql.MysqlUtil(app.config) 
-        self.redisUtil = redis.RedisUtil(app.config)
+        self.redisUtil = sredis.RedisUtil(app.config)
         self.redisLink = self.redisUtil.getRedis()
         self.mongoUtil = Mongo.MongoUtil(app.config)
         self.userCDict = {}
