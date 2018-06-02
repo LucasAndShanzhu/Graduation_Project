@@ -1,10 +1,11 @@
 db.article_big_image.insert({
+	'_id': ObjectId(''),
     'id':123,
     'title': '',                //标题
     'detail': ''                //简介
     'source': 'rmrbwx',         //作者（英文）
     'source_detail': '人民日报', //作者(中文)
-    'cover': ['asdasd']         //封面图片
+    'image': ['asdasd']         //封面图片
     'channel': 'weixin',        //渠道
     'spider_source': 'sougou',  //爬取来源.
     'url': '',                  //源url. 微信的可能失效.

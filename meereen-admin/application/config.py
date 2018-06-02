@@ -4,7 +4,10 @@
 # @Last Modified by:   shanzhu
 # @Last Modified time: 2018-02-09 10:37:49
 
-class Config(Object):
+class Config(object):
+    DEBUG = False
+    PERMANENT_SESSION_LIFETIME = 3600
+
     MONGO_HOST = '127.0.0.1'
     MONGO_PORT = 27017
     MONGO_DBNAME = 'item'
@@ -12,14 +15,15 @@ class Config(Object):
     MONGO_PASSWORD = '863bbc7b3febf915dd417c6195f74686'
     MONGO_CONNECT = False
 
-    LOG_FILE_NAME = '/User/gonglingxiao/var/log/meereen-admin/access.log'
+    LOG_FILE_NAME = '/home/lucas/var/log/meereen-admin/access.log'
 
     REDIS_HOST = '127.0.0.1'
     REDIS_PORT = 6379
     REDIS_PASSWORD = 'glx1997'
+    REDIS_TIMEOUT = 5
 
     SESSION_TYPE = 'filesystem'
-    SECRET_KEY = 'super secret key'
+    SECRET_KEY = '\xd7\x83F\x92\xeb\x07\xc2>W\x96\x1b\xfb\xaa\x90\x95\xdf\xd0\xe2\x97\xe0\x9dr\xaf5'
 
     MAIL_SERVER = 'smtp.163.com'
     MAIL_PORT = 25
@@ -33,15 +37,12 @@ class Config(Object):
     MYSQL_DATABASE_PASSWORD = 'glx1997'
     MYSQL_DATABASE_DB = 'meereen_admin'
 
-    @staticmethod
-    def init_app(app):
-        pass
-
 class ProductionConfig(Config):
     LOG_FILE_NAME = '/var/log/meereen_admin/access.log'
 
 class DebugProductionConfig(Config):
-    pass
+    DEBUG = True
+    PERMANENT_SESSION_LIFETIME = 86400
 
 config = {
     'debug': DebugProductionConfig,
@@ -49,3 +50,6 @@ config = {
 
     'default': ProductionConfig
 }
+
+def getConfig(env='default'):
+    return config[env]
