@@ -15,7 +15,7 @@ class MongoUtil(object):
         self.uri = uri
         self.db = None
         self._link()
-        if self.db = None:
+        if self.db is None:
             raise MongoTimeoutException()
         
     def _link(self):
