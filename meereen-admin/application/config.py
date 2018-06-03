@@ -33,7 +33,7 @@ class Config(object):
 
     MYSQL_DATABASE_HOST = '127.0.0.1'
     MYSQL_DATABASE_PORT = 3306
-    MYSQL_DATABASE_USER = 'lucas'
+    MYSQL_DATABASE_USER = 'root'
     MYSQL_DATABASE_PASSWORD = 'glx1997'
     MYSQL_DATABASE_DB = 'meereen_admin'
 

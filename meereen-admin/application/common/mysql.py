@@ -29,6 +29,7 @@ class MysqlUtil(object):
         try:
             self.link = pymysql.connect(**self.args)
         except Exception as e:
+            print e
             self.link = None
 
     def getCursor(self):
