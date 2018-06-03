@@ -5,13 +5,13 @@ from sexceptions import MongoTimeoutException
 class MongoUtil(object):
     """docstring for MongoDb"""
     def __init__(self, config):
-        super(MongoDb, self).__init__()
+        super(MongoUtil, self).__init__()
         self.user = config.MONGO_USERNAME
         self.password = config.MONGO_PASSWORD
         self.host = config.MONGO_HOST
         self.port = config.MONGO_PORT
         self.dbname = config.MONGO_DBNAME
-        uri = "mongodb://{}:{}@{}:{}/{}".format(user, password, host, port, dbname)
+        uri = "mongodb://{}:{}@{}:{}/{}".format(self.user, self.password, self.host, self.port, self.dbname)
         self.uri = uri
         self.db = None
         self._link()

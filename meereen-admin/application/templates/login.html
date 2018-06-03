@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block local_css %}
+
+.main{
+    width: 100%;
+    height: 100vh;
+    background: #d7e9f9;
+}
+.mian-box{
+    width: 437px;
+    height: 40vh;
+    position: absolute;
+    border: #f5f8fb;
+    top: 25%;
+    left: 35%;
+    overflow: visible;
+    background: #f5f8fb;
+}
+.box-header{
+    height: 75px;
+    padding-top: 8.5px;
+    text-align: center;
+    font-size: 40px;
+}
+.input-line{
+    margin: 10px;
+}
+.login-line{
+    height: 25%;
+    /*padding-top: 10px;*/
+}
+{% endblock %}
+
+{% block main_body %}
+    <div class="main">
+        <div class="mian-box">
+            <div class="box-header">
+                登录
+            </div>
+            <div class="input-line">
+                <div class="input-group">
+                    <span class="input-group-addon">昵称</span>
+                    <input type="text" name="nickname" id="nickname" class="form-control">
+                </div>
+            </div>
+            <div class="input-line">
+                <div class="input-group">
+                    <span class="input-group-addon">密码</span>
+                    <input type="password" name="password" id="password" class="form-control">
+                </div>                
+            </div>
+            <div class="input-line login-line">
+                <div class="row" style="margin: 15px;">
+                    <div class="btn btn-default" id="login">登录</div>
+                    <a href="#" class="pull-right">注册</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="display: none;" id="ke">{{publice}}</div>
+    <div style="display: none;" id="kn">{{publicn}}</div>
+    <div style="display: none;" id="pk">{{publick}}</div>
+    <textarea style="display: none;" id="pwd"></textarea>
+{% endblock %}
+
+{% block local_script %}
+    $(document).ready(function(){
+        $("#login").on('click', function(){
+            var nickname = $("#nickname").val();
+            var pwd = $("#password").val();
+            var m = String(Date.parse(new Date())) + pwd;
+            m = md5(m);
+            $.ajax({
+                url: '{{url_for("login.reCode")}}',
+                type: 'POST',
+                data: {
+                    'password': m + pwd, 
+                },
+                success: function(e){
+                    $("#pwd").html(e.data);
+                    var password = $("#pwd").html();
+                    $.ajax({
+                        url: '{{url_for("login.vertify")}}',
+                        type: 'POST',
+                        data: {
+                            'nickname': nickname,
+                            'password': password
+                        },
+                        success: function(e) {
+                            if(e.error != 0) {
+                                console.log(e.error);
+                                alert("用户名或密码错误");
+                            } else {
+                                window.location.href = "{{url_for('login.login')}}";
+                            }
+                        }
+                    })
+                }
+            });
+        });
+    })
+{% endblock %}

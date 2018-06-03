@@ -6,11 +6,11 @@ from sexceptions import MysqlTimeoutException
 class MysqlUtil(object):
 
     def __init__(self, config):
-        host = config.MYSQL_DATABASE_HOST if hasattr(config, MYSQL_DATABASE_HOST) else '127.0.0.1'
-        port = config.MYSQL_DATABASE_PORT if hasattr(config, MYSQL_DATABASE_PORT) else 3306 
-        user = config.MYSQL_DATABASE_USER if hasattr(config, MYSQL_DATABASE_USER) else 'lucas'
-        password = config.MYSQL_DATABASE_PASSWORD if hasattr(config, MYSQL_DATABASE_PASSWORD) else 'glx1997'
-        db = config.MYSQL_DATABASE_DB if hasattr(config, MYSQL_DATABASE_DB) else 'meereen_admin'
+        host = config.MYSQL_DATABASE_HOST if hasattr(config, 'MYSQL_DATABASE_HOST') else '127.0.0.1'
+        port = config.MYSQL_DATABASE_PORT if hasattr(config, 'MYSQL_DATABASE_PORT') else 3306 
+        user = config.MYSQL_DATABASE_USER if hasattr(config, 'MYSQL_DATABASE_USER') else 'lucas'
+        password = config.MYSQL_DATABASE_PASSWORD if hasattr(config, 'MYSQL_DATABASE_PASSWORD') else 'glx1997'
+        db = config.MYSQL_DATABASE_DB if hasattr(config, 'MYSQL_DATABASE_DB') else 'meereen_admin'
         args = {
             'host': host,
             'port': port,
@@ -21,28 +21,28 @@ class MysqlUtil(object):
         }
 
         self.args = args
-        self.connect = None
+        self.link = None
 
     def connect(self):
-        if self.connect:
+        if self.link:
             self.close()
         try:
-            self.connect = pymysql.connect(**self.args)
+            self.link = pymysql.connect(**self.args)
         except Exception as e:
-            self.connect = None
+            self.link = None
 
     def getCursor(self):
-        if self.connect:
-            return self.connect.cursor()
+        if self.link:
+            return self.link.cursor()
         return None
 
     def getConnect(self):
-    	if self.connect:
-    		return self.connect
+    	if self.link:
+    		return self.link
     	raise MysqlTimeoutException()
 
     def close(self):
-        if self.connect:
-            self.connect.close()
-            self.connect = None
+        if self.link:
+            self.link.close()
+            self.link = None
 
