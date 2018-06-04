@@ -41,7 +41,7 @@ def register():
     if not nickname or not email or not password or not code:
         return jsonify(retData)
     redisLink = app.redis.link()
-    redisKey = "{}_code".format()
+    redisKey = "{}_code".format(email)
     redisCode = redisLink.get(redisKey)
     if redisCode != code:
         retData['error'] = 1
