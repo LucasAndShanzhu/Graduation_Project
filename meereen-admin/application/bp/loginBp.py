@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import Blueprint, request, render_template, jsonify
+from flask import Blueprint, request, render_template, jsonify, session
 from base64 import b64encode, b64decode
 from application import app, hasLogin
 from ..common import util
@@ -18,7 +18,6 @@ def vertify():
     nickname = request.form.get('nickname', None)
     password = request.form.get('password', None)
     password = b64decode(password)
-    print nickname, password
     retData = {'error': 2}
     if not nickname or not password:
         return jsonify(retData)
@@ -26,6 +25,7 @@ def vertify():
     output = userModel.UserModel.verfiPassword(nickname, pwd)
     if output:
         retData['error'] = 0
+        session['username'] = nickname
     else:
         retData['error'] = 1
     return jsonify(retData)

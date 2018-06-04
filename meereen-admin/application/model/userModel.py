@@ -36,8 +36,8 @@ class UserModel(object):
     def addUser(nickname, password, email):
         app.mysql.connect()
         cursor = app.mysql.getCursor()
-        sql = "select id from user where nickname=%s"
-        cursor.execute(sql, (nickname,))
+        sql = "select id from user where email=%s"
+        cursor.execute(sql, (email,))
         output = cursor.fetchone()
         userId = None if output else output[0]
         if userId is not None:

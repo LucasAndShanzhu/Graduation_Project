@@ -17,6 +17,7 @@ def createApp(env="default"):
     app.pkn = hex(app.public.n)[2:-1]
     app.private = rsaKey[1]
     app.mysql = mysql.MysqlUtil(config)
+    app.redis = sredis.RedisUtil(config)
     # app.mongo = mongo.MongoUtil(config)
     return app
 

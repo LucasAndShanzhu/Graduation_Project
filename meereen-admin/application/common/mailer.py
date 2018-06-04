@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-# @Author: shanzhu
-# @Date:   2017-10-23 15:28:18
-# @Last Modified by:   shanzhu
-# @Last Modified time: 2018-01-02 19:24:11
-
 from email import encoders
 from email.header import Header
 from email.mime.text import MIMEText
@@ -48,23 +43,11 @@ class MailSender(object):
         message = message.encode('utf8')
         args['message'] = message
         if subject == '':
-            subject = u'默认爬虫警告.'
+            subject = u'验证码'
         args['subject'] = subject
-        try:
-            mail = MailSender('gong_lingxiao@163.com', 'glx1997', 'smtp.163.com', 465)
-            mail.sendMail(**args)
-            mail.quit()
-        except:
-            from redis import Redis 
-            try:
-                temp_redis = Redis()
-                temp_redis.rpush('email', 'message')
-            except Exception as e:
-                import os
-                os._exit(-1)
+        mail = MailSender('gong_lingxiao@163.com', 'glx1997', 'smtp.163.com', 465)
+        mail.sendMail(**args)
+        mail.quit()
 
 if __name__ == '__main__':
     MailSender.send(u'hello, this is the hello world', u'Test')
-
-
-

@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+
+{% block local_css %}
+.main-box {
+    width: 437px;
+    height: 45vh;
+    top: 20vh;
+    position: absolute;
+    border: #f5f8fb;
+    left: 35%;
+    overflow: visible;
+    background: #f5f8fb;
+}
+.title-div{
+    height: 75px;
+    padding-top: 8.5px;
+    text-align: center;
+    font-size: 40px;
+    border-bottom: 2px #ece5e5 solid;
+}
+.info-box{
+    height: 80%;
+    padding: 10px
+}
+.line {    
+    height: 40px;
+    padding-top: 5px;
+    padding-left:  5px;
+}
+.input-self{
+    width: 100%;
+}
+.small-span{
+    margin-right: 37px;
+}
+.long-input{
+    width: 70%;
+}
+.short-input{
+    width: 50%;
+}
+.btn-line{
+    text-align: center;
+}
+.long-span{
+    margin-right: 22px;
+}
+.code-div{
+    float: right;
+    margin-right: 60px;
+}
+{% endblock %}
+
+{% block main_body %}
+<div class="main-box">
+    <div class="title-div">
+        注册
+    </div>
+    <div class="info-box">
+        <div class="line">
+            <div class="input-group input-self">
+                <span class="small-span">邮箱:</span>
+                <input type="email" name="email" id="email" class="long-input">
+            </div>
+        </div>
+        <div class="line">
+            <div class="input-group input-self">
+                <span class="small-span">密码:</span>
+                <input type="password" name="password" id="password" class="long-input">
+            </div>
+        </div>
+        <div class="line">
+            <div class="input-group input-self">
+                <span class="small-span disabled">昵称:</span>
+                <input type="text" disabled="disabled" name="nickname" id="nickname" class="long-input">
+            </div>
+        </div>
+        <div class="container" style="margin-left: 6px;width: 100%;">
+            <div class="row">
+                <div class="input-group" style="float: left;">
+                    <span class="long-span">验证码:</span>
+                    <input type="text" name="code" disabled="disabled" id="code" class="long-input">
+                </div>
+                <div class="code-div">
+                    <div class="btn btn-default disabled" id="get-code-btn">获取验证码</div>
+                </div>
+            </div>
+        </div>
+        <div class="line btn-line">
+            <div class="btn btn-default" id="register-btn">注册</div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block local_script %}
+    $(document).ready(function(){
+        function front_step_ok() {
+            var email = $("#email").val();
+            var password = $("#password").val();
+            if(!email || !password) {
+                return false;
+            }else {
+                $("#nickname").removeAttr('disabled');
+                $("#code").removeAttr('disabled');
+                $("#get-code-btn").removeClass('disabled');
+            }
+        };
+        function verEmail(email) {
+            var pattern = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;  
+            var strEmail = pattern.test(email); 
+            return strEmail;
+        };
+
+        $("#email").change(function(){
+            var email = $("#email").val();
+            if (!email) {
+                return false;
+            }
+            if (!verEmail(email)) {
+                alert('邮箱格式不正确');
+                $("#email").val('');
+            }
+            front_step_ok();
+        });
+        $("#password").change(function(){
+            front_step_ok();
+        });
+        $("#get-code-btn").click(function(){
+            if($(this).hasClass('disabled')) {
+                return false;
+            }
+            var email = $("#email").val();
+            if (!verEmail(email)) {
+                return false;
+            }
+            $.ajax({
+                url: '{{url_for("register.sendVCode")}}',
+                type: 'POST',
+                data: {
+                    'email': email,
+                },
+                success: function(e){
+                    var code = e.error;
+                    if (code == 999){
+                        alert('邮箱不能为空');
+                    }else if(code == 1){
+                        alert('服务器出问题了');
+                    } else if(code == 0) {
+                        alert('验证码已发送至邮箱，若没收到可以在60s后再次点击发送');
+                        $("#get-code-btn").css('display', 'none');
+                        setTimeout("$('#get-code-btn').css('display', 'block')", 60000);
+                    }
+                },
+                error: function(){
+                    alert('服务器出问题了');
+                }
+            });
+
+            $("#register-btn").click(function(){
+                var email = $("#email").val();
+                var pwd = $("#password").val();
+                var code = $("#code").val();
+                var nickname = $("#nickname").val();
+                var m = String(Date.parse(new Date())) + pwd;
+                m = md5(m);
+                $.ajax({
+                    url: '{{url_for("login.reCode")}}',
+                    type: 'POST',
+                    data: {
+                        'password': m + pwd, 
+                    },
+                    success: function(e){
+                        var password = e.data;
+                        $.ajax({
+                            url: '{{url_for("register.register")}}',
+                            type: 'POST',
+                            data: {
+                                'nickname': nickname,
+                                'email': email,
+                                'password': password,
+                                'code':code
+                            },
+                            success: function(e){
+                                var error = e.error
+                                if(error == 1) {
+                                    alert("验证码不正确");
+                                    $("#code").val('');
+                                } else if(error == 2) {
+                                    console.log("密码解密失败");
+                                } else if(error == 3) {
+                                    alert("此邮箱已经进行了注册");
+                                } else if(error == 0) {
+                                    window.location.href = "{{url_for('login.login')}}";
+                                }
+                            }
+                        })
+                    },
+                });
+            });
+        })
+    })
+{% endblock %}

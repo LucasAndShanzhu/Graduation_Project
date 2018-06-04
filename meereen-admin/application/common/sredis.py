@@ -12,16 +12,11 @@ class RedisUtil(object):
             'port': port,
             'password': password,
             'socket_timeout': socket_timeout,
-            'socket_connect_timeout': socket_connect_timeout
+            'socket_connect_timeout': socket_timeout
         }
         self.args = args
-        self.redisClient = None
-        self._link()
 
-    def _link(self):
-        if not self.redisClient:
-            self.redisClient = Redis(**self.args)
-            self.redisClient.ping()
-
-    def getRedis(self):
-        return self.redisClient
+    def link(self):
+        redisClient = Redis(**self.args)
+        redisClient.ping()
+        return redisClient
