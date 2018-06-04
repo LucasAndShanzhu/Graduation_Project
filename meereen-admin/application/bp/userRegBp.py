@@ -21,7 +21,7 @@ def sendVCode():
     code = ''.join([str(randint(0,9)) for i in xrange(6)])
     try:
         redisLink = app.redis.link()
-        redisKey = "{}_code".format()
+        redisKey = "{}_code".format(email)
         redisLink.set(redisKey, code)
         redisLink.expire(redisKey, 80)
         mailer.MailSender.send(code)
