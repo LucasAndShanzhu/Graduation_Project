@@ -38,10 +38,11 @@ class MailSender(object):
         return formataddr( (Header(name, 'utf-8').encode(), addr.encode('utf-8') if isinstance(addr, unicode) else addr) )
 
     @staticmethod
-    def send(message, subject=u''):
+    def send(to, message, subject=u''):
         args = {}
         message = message.encode('utf8')
         args['message'] = message
+        args['to'] = to
         if subject == '':
             subject = u'验证码'
         args['subject'] = subject

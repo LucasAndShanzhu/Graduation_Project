@@ -24,7 +24,7 @@ def sendVCode():
         redisKey = "{}_code".format(email)
         redisLink.set(redisKey, code)
         redisLink.expire(redisKey, 80)
-        mailer.MailSender.send(code)
+        mailer.MailSender.send(email, code)
         retData['error'] = 0
     except Exception as e:
         print e
