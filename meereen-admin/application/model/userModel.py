@@ -39,7 +39,7 @@ class UserModel(object):
         sql = "select id from user where email=%s"
         cursor.execute(sql, (email,))
         output = cursor.fetchone()
-        userId = None if output else output[0]
+        userId = None if not output else output[0]
         if userId is not None:
             app.mysql.close()
             return None
