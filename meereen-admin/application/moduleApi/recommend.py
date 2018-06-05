@@ -36,7 +36,7 @@ class RecommendApi(object):
         itemQList = self.getItemQualityList(optionalList)
         pmItemQList.extend(itemQList)
 
-    //获取可选内容列表
+    #获取可选内容列表
     def getOptionalList(self, userId):
         userScanKey = "user_item_list_{}_set".format(userId)
         allOptionalKey = "all_optional_item_set"
@@ -73,7 +73,7 @@ class RecommendApi(object):
         show_num = itemData['show_num']
         itemTime = itemData['original_time']
         quality = 0
-        if show_num = 1 and click_num = 1:
+        if show_num == 1 and click_num == 1:
             show_num = 5
         if show_num:
             quality = click_num / (float(show_num) * 2)
