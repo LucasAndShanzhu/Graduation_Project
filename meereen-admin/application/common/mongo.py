@@ -21,13 +21,13 @@ class MongoUtil(object):
             raise MongoTimeoutException()
         
     def _link(self):
-        if self.db is None:
-            try:
-                mogno = MongoClient(self.uri, serverSelectionTimeoutMS=3)
-                self.db = mongo[self.dbname]
-                self.db.admin.command('ping')
-            except Exception as e:
-                self.db = None
+        try:
+            mogno = MongoClient(self.uri, serverSelectionTimeoutMS=3)
+            self.db = mongo[self.dbname]
+            self.db.admin.command('ping')
+        except Exception as e:
+            print 'mongo link, ' + str(e)
+            self.db = None
 
     def getCollect(self, collect_name):
         return self.db[collect_name] if self.db is not None else None
