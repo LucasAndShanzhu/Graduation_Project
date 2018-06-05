@@ -11,7 +11,7 @@ class RecommendApi(object):
         self.mysqlUtil = mysql.MysqlUtil(app.selfconfig) 
         self.redisUtil = sredis.RedisUtil(app.selfconfig)
         self.redisLink = self.redisUtil.link()
-        self.mongoUtil = Mongo.MongoUtil(app.selfconfig)
+        self.mongoUtil = mongo.MongoUtil(app.selfconfig)
         self.userCDict = {}
 
     def getRecommendList(self, userId):
@@ -19,9 +19,9 @@ class RecommendApi(object):
         pmUserCharDict = multiprocessing.Manager().dict()
         processList = []
         process = multiprocessing.Process(target=self.judgeItemQualityList, args=(userId, pmItemQList))
-        processList.append()
+        processList.append(process)
         process = multiprocessing.Process(target=self.getUserCharact, args=(userId, pmUserCharDict))
-        processList.append()
+        processList.append(process)
         for process in processList:
             process.start()
         for process in processList:
