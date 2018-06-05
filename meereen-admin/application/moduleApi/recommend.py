@@ -48,8 +48,8 @@ class RecommendApi(object):
 
     def getUserCharact(self, userId, pmUserCharDict):
         sql = "select item_id, action, created_at from user_action where user_id={}".format(userId)
-        self.mysqlUtil.connect()
-        cursor = self.mysqlUtil.getCursor()
+        connect = self.mysqlUtil.connect()
+        cursor = connect.cursor()
         cursor.execute(sql)
         rList = cursor.fetchall()
         if not rList or not rList[0]:
@@ -62,7 +62,7 @@ class RecommendApi(object):
         elif listLen == 1:
             charaterDict = tempList[0]
         pmUserCharDict.update(charaterDict)
-        self.mysqlUtil.close()
+        connect.close()
 
     def forecastItemInterest(self, itemQList, userCharactDict):
         interestList = map(self._mapItemForecast, itemQList)

@@ -29,6 +29,7 @@ def show():
             itemData['author'] = itemData['source_detail']
             itemData['_id'] = str(itemData['_id'])
             itemData['url'] = 'https://spider-lucas.oss-cn-beijing.aliyuncs.com/html/' + itemData['content']
+            itemData['created_at'] = itemData['created_at'][:10]
             itemList.append(itemData)
             redisLink.sadd(redisKey, itemId)
             collect.update({'_id': ObjectId(itemId)}, {'$inc': {'show_num': 1}})

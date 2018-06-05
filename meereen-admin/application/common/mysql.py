@@ -21,29 +21,11 @@ class MysqlUtil(object):
         }
 
         self.args = args
-        self.link = None
 
     def connect(self):
-        if self.link:
-            self.close()
+        link = None
         try:
-            self.link = pymysql.connect(**self.args)
+            link = pymysql.connect(**self.args)
         except Exception as e:
             print e
-            self.link = None
-
-    def getCursor(self):
-        if self.link:
-            return self.link.cursor()
-        return None
-
-    def getConnect(self):
-    	if self.link:
-    		return self.link
-    	raise MysqlTimeoutException()
-
-    def close(self):
-        if self.link:
-            self.link.close()
-            self.link = None
-
+        return link
