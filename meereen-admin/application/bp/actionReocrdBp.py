@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, request, render_template, jsonify, session
+from bson import ObjectId
 from application import app, hasLogin
 from ..model import userModel, recordModel
 
@@ -17,6 +18,11 @@ def record():
     userId = userModel.UserModel.getUserId(nickaname)
     if userId is None:
         return jsonify(retData)
+    if action == 'click':
+        app.mongo.link()
+        collect = app.mongo.getCollect("article_big_image")
+        collect.update({'_id': ObjectId(itemId)}, {'$inc': {'click_num': 1}})
+        app.mongo.close()
     if recordModel.RecordModel.recordAction(userId, itemId, action):
         retData['error'] = 0
     else:

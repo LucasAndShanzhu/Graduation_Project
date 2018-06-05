@@ -180,6 +180,15 @@ $(document).ready(function(){
         })
     };
 
+    $("a").click(function(){
+        var url = $(this).attr('href');
+        var action = 'click';
+        var li = $(this).parents('li').first();
+        var item = li.attr('data-id');
+        record(item, action);
+        window.open(url);
+    });
+
     $("#change-others").click(function(){
         window.location.replace("{{url_for('feed.show')}}");
     });
