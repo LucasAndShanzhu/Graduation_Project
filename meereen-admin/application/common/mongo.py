@@ -33,5 +33,4 @@ class MongoUtil(object):
 
     def close(self):
         if self.db:
-            self.db.close()
             self.db = None
