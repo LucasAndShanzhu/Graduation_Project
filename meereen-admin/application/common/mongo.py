@@ -24,7 +24,6 @@ class MongoUtil(object):
         try:
             mongo = MongoClient(self.uri, serverSelectionTimeoutMS=3)
             self.db = mongo[self.dbname]
-            self.db.admin.command('ping')
         except Exception as e:
             print 'mongo link, ' + str(e)
             self.db = None
