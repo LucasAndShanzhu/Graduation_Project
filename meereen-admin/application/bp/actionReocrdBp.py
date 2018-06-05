@@ -3,12 +3,12 @@ from flask import Blueprint, request, render_template, jsonify, session
 from application import app, hasLogin
 from ..model import userModel, recordModel
 
-actionReocrdBp = Blueprint('record', __name__, url_prefix='/register')
+actionReocrdBp = Blueprint('record', __name__, url_prefix='/record')
 
 # @hasLogin
 @actionReocrdBp.route('/point', methods=['POST'])
 def record():
-    nickaname = request.form.get('nickaname', '')
+    nickaname = request.form.get('nickname', '')
     itemId = request.form.get('item', '')
     action = request.form.get('action', '')
     retData = {'error': 999}

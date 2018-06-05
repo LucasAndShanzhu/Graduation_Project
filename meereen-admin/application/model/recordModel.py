@@ -10,8 +10,8 @@ class RecordModel(object):
         cursor = app.mysql.getCursor()
         success = True
         try:
-            sql = "insert into user_action(user_id, item_id, action) values(%d, %s, %s)"
-            cursor.execute(sql, (userId, itemId, action))
+            sql = "insert into user_action(user_id, item_id, action) values({}, %s, %s)".format(userId)
+            cursor.execute(sql, (itemId, action))
         except Exception as e:
             print e
             success = False
