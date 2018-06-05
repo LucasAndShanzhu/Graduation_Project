@@ -54,7 +54,13 @@ class RecommendApi(object):
         rList = cursor.fetchall()
         if not rList or not rList[0]:
             rList = []
-        charaterDict = reduce(self._reduceUserCharater, map(self._mapUserCharater, rList))
+        tempList = map(self._mapUserCharater, rList)
+        charaterDict = {}
+        listLen = len(tempList)
+        if listLen > 1:
+            charaterDict = reduce(self._reduceUserCharater, tempList)
+        elif listLen == 1:
+            charaterDict = tempList[0]
         pmUserCharDict.update(charaterDict)
         self.mysqlUtil.close()
 
@@ -67,11 +73,11 @@ class RecommendApi(object):
         self.mongoUtil.link()
         collect = self.mongoUtil.getCollect('article_big_image')
         queryCondition = {'_id': ObjectId(itemId)}
-        dataKey = {'source_detail': 1, 'tag': 1, 'show_num': 1, 'click_num': 1, 'original_time': 1}
+        dataKey = {'source_detail': 1, 'tag': 1, 'show_num': 1, 'click_num': 1, 'created_at': 1}
         itemData = collect.find_one(queryCondition, dataKey)
         click_num = itemData['click_num']
         show_num = itemData['show_num']
-        itemTime = itemData['original_time']
+        itemTime = itemData['created_at']
         quality = 0
         if show_num == 1 and click_num == 1:
             show_num = 5
