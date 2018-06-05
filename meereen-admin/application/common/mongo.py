@@ -22,7 +22,7 @@ class MongoUtil(object):
         
     def _link(self):
         try:
-            mogno = MongoClient(self.uri, serverSelectionTimeoutMS=3)
+            mongo = MongoClient(self.uri, serverSelectionTimeoutMS=3)
             self.db = mongo[self.dbname]
             self.db.admin.command('ping')
         except Exception as e:
