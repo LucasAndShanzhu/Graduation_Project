@@ -8,6 +8,7 @@ from config import getConfig
 def createApp(env="default"):
     app = Flask(__name__)
     config = getConfig()
+    app.selfconfig = config
     app.config.from_object(config)
 
     rsaKey = rsa.newkeys(1024)

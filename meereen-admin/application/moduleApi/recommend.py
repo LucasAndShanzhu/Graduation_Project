@@ -8,10 +8,10 @@ from ..common import mysql, sredis, mongo, util
 
 class RecommendApi(object):
     def __init__(self):
-        self.mysqlUtil = mysql.MysqlUtil(app.config) 
-        self.redisUtil = sredis.RedisUtil(app.config)
+        self.mysqlUtil = mysql.MysqlUtil(app.selfconfig) 
+        self.redisUtil = sredis.RedisUtil(app.selfconfig)
         self.redisLink = self.redisUtil.link()
-        self.mongoUtil = Mongo.MongoUtil(app.config)
+        self.mongoUtil = Mongo.MongoUtil(app.selfconfig)
         self.userCDict = {}
 
     def getRecommendList(self, userId):
