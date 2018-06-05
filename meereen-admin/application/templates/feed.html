@@ -6,7 +6,8 @@
     left: 20vw;
     position: absolute;
     background: #fff;
-    min-height: 100vh;
+    height: 100vh;
+    overflow-y: auto;
 }
 .header{
     height: 40px;
@@ -76,7 +77,7 @@ ul {
 }
 .long-detail-area{
     width: 100%;
-    max-height: 12vh;
+    height: 12vh;
     word-wrap: break-word;
     word-break:break-all;
     overflow-y:  hidden;
@@ -88,8 +89,7 @@ ul {
 <div class="main-box">
     <div class="header">
         <div class="user-info-div">
-            <span style="margin: 5px;">User</span>
-            <span>Email</span>
+            <span style="margin: 5px;">{{nickname}}</span>
         </div> 
     </div>
     <div class="body">

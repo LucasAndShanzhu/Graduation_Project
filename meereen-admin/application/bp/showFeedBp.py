@@ -35,4 +35,4 @@ def show():
             collect.update({'_id': ObjectId(itemId)}, {'$inc': {'show_num': 1}})
             app.mongo.close()
     app.mongo.close()
-    return render_template('feed.html', itemList=itemList)
+    return render_template('feed.html', itemList=itemList, nickname=nickname)
