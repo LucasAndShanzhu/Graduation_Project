@@ -10,7 +10,7 @@ class RecommendApi(object):
     def __init__(self):
         self.mysqlUtil = mysql.MysqlUtil(app.config) 
         self.redisUtil = sredis.RedisUtil(app.config)
-        self.redisLink = self.redisUtil.getRedis()
+        self.redisLink = self.redisUtil.link()
         self.mongoUtil = Mongo.MongoUtil(app.config)
         self.userCDict = {}
 
@@ -51,7 +51,10 @@ class RecommendApi(object):
         self.mysqlUtil.connect()
         cursor = self.mysqlUtil.getCursor()
         cursor.execute(sql)
-        charaterDict = reduce(self._reduceUserCharater, map(self._mapUserCharater, cursor.fetchall()))
+        rList = cursor.fetchall()
+        if not rList or not rList[0]:
+            rList = []
+        charaterDict = reduce(self._reduceUserCharater, map(self._mapUserCharater, rList))
         pmUserCharDict.update(charaterDict)
         self.mysqlUtil.close()
 

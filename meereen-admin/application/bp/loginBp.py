@@ -12,7 +12,6 @@ loginBp = Blueprint('login', __name__)
 def login():
     return render_template('login.html', publice=app.pke, publicn=app.pkn, publick=app.publicStr)
 
-@hasLogin
 @loginBp.route('/login', methods=['POST'])
 def vertify():
     nickname = request.form.get('nickname', None)
