@@ -14,6 +14,8 @@ class MongoUtil(object):
         uri = "mongodb://{}:{}@{}:{}/{}".format(self.user, self.password, self.host, self.port, self.dbname)
         self.uri = uri
         self.db = None
+
+    def link(self):
         self._link()
         if self.db is None:
             raise MongoTimeoutException()

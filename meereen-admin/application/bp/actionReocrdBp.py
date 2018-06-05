@@ -5,10 +5,10 @@ from ..model import userModel, recordModel
 
 actionReocrdBp = Blueprint('record', __name__, url_prefix='/record')
 
-# @hasLogin
+@hasLogin
 @actionReocrdBp.route('/point', methods=['POST'])
 def record():
-    nickaname = request.form.get('nickname', '')
+    nickaname = session.get('username', '')
     itemId = request.form.get('item', '')
     action = request.form.get('action', '')
     retData = {'error': 999}
@@ -18,7 +18,7 @@ def record():
     if userId is None:
         return jsonify(retData)
     if recordModel.RecordModel.recordAction(userId, itemId, action):
-        retData['error'] = 1
-    else:
         retData['error'] = 0
+    else:
+        retData['error'] = 1
     return jsonify(retData)

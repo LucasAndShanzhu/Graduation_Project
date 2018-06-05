@@ -64,6 +64,7 @@ class RecommendApi(object):
         return interestList[:10]
 
     def _mapItemQuality(self, itemId):
+        self.mongoUtil.link()
         collect = self.mongoUtil.getCollect('article_big_image')
         queryCondition = {'_id': ObjectId(itemId)}
         dataKey = {'source_detail': 1, 'tag': 1, 'show_num': 1, 'click_num': 1, 'original_time': 1}
@@ -83,6 +84,7 @@ class RecommendApi(object):
             'quality': quality,
             '_id': itemId
         }
+        self.mongoUtil.close()
         return retItemData
 
     def _judgeTimeQ(self, itemTime):
@@ -96,6 +98,7 @@ class RecommendApi(object):
 
     def _mapUserCharater(self, record):
         itemId, action, createdAt = record
+        self.mongoUtil.link()
         collect = self.mongoUtil.getCollect("article_big_image")
         queryCondition = {'_id': ObjectId(itemId)}
         targetKey = {'source_detail': 1, 'tag': 1}
@@ -113,6 +116,7 @@ class RecommendApi(object):
         for tag in itemData['tag']:
             weightDict[tag] = tagQ * timeQ
         weightDict[itemData['source_detail']] = sourceQ * timeQ
+        self.mongoUtil.close()
         return weightDict
 
     def _reduceUserCharater(self, sumDict, rDict): 

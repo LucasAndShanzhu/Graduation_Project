@@ -1,0 +1,201 @@
+{% extends "base.html" %}
+
+{% block local_css %}
+.main-box{
+    width: 60vw;
+    left: 20vw;
+    position: absolute;
+    background: #fff;
+    min-height: 100vh;
+}
+.header{
+    height: 40px;
+    border-bottom: solid #ddd;
+}
+.user-info-div{
+    height: 100%;
+    padding: 10px;
+}
+.body{
+    margin-top: 10px;
+    padding: 5px;
+}
+ul {
+    padding-left: 0px;
+}
+.feed-box{
+    height: 20vh;
+    position: relative;
+    margin-bottom: 3vh;
+}
+.image-area{
+    width: 13vw;
+    height: 21vh;
+    float: left;
+}
+.feed-cover{
+    height: 21vh;
+    width: 13vw;
+}
+.info-area{
+    margin-left: 5px;
+    width: 45vw;
+    position: absolute;
+    left: 13vw;
+}
+.detail-area{
+    word-wrap: break-word;
+    word-break:break-all;
+    height: 12vh;
+    margin-bottom: 2px;
+    overflow-y:  hidden;
+}
+.author{
+    width: 16vh;
+    overflow: hidden;
+    float: left;
+}
+.date-div{
+    width: 20vh;
+    float: left;
+    margin-left: 1vw;
+}
+.operate-div{
+    float: right;
+    margin-right: 3vw;
+}
+.item-li{
+    list-style-type: none;
+}
+.footer{
+    width: 60vw;
+    text-align: center;
+}
+.long-info-area{
+    height:100%;
+}
+.long-detail-area{
+    width: 100%;
+    max-height: 12vh;
+    word-wrap: break-word;
+    word-break:break-all;
+    overflow-y:  hidden;
+    margin-bottom: 2px;
+}
+{% endblock %}
+
+{% block main_body %}
+<div class="main-box">
+    <div class="header">
+        <div class="user-info-div">
+            <span style="margin: 5px;">User</span>
+            <span>Email</span>
+        </div> 
+    </div>
+    <div class="body">
+        <div class="show-div">
+            <ul>
+                {% for item in itemList %}
+                    {% if item['cover'] %}
+                    <li class="item-li" data-id="{{item['_id']}}">
+                        <div class="feed-box">
+                            <div class="image-area">
+                                <img src="{{item['cover']}}" class="feed-cover">
+                            </div>
+                            <div class="info-area">
+                                <div class="title-div">
+                                    <a href="{{item['url']}}">{{item['title']}}</a>
+                                </div>
+                                <div class="detail-area">{{item['detail']}}</div>
+                                <div class="other-info">
+                                    <div class="author">{{item['author']}}</div>
+                                    <div class="date-div">{{item['created_at']}}</div>
+                                    <div class="operate-div">
+                                        <div class="btn">
+                                            <span class="glyphicon glyphicon-thumbs-up like-btn"></span>
+                                        </div>                                    
+                                        <div class="btn">
+                                            <span class="glyphicon glyphicon-eye-close unlike-btn"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li class="item-li" data-id="{{item['_id']}}">
+                        <div class="feed-box">
+                            <div class="long-info-area">
+                                <div class="long-title-div">
+                                    <a href="{{item['url']}}">{{item['title']}}</a>
+                                </div>
+                                <div class="long-detail-area">{{item['detail']}}</div>
+                                <div class="long-other-info">
+                                    <div class="author">{{item['author']}}</div>
+                                    <div class="date-div">{{item['created_at']}}</div>
+                                    <div class="operate-div">
+                                        <div class="btn">
+                                            <span class="glyphicon glyphicon-thumbs-up like-btn"></span>
+                                        </div>                                    
+                                        <div class="btn">
+                                            <span class="glyphicon glyphicon-eye-close unlike-btn"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="btn btn-default" id="change-others">
+            换一批
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block local_script %}
+$(document).ready(function(){
+    function record(item_id, action) {
+        $.ajax({
+            url: '{{ url_for("record.record") }}',
+            type: 'POST',
+            data: {
+                'item': item_id,
+                'action': action,
+            },
+            success: function(e){
+                if(e.error != 0) {
+                    console.log('log wrong');
+                    console.log(e.error);
+                }
+            },
+            error: function(){
+                console.log('netword wrong');
+            }
+        })
+    };
+
+    $("#change-others").click(function(){
+        window.location.replace("{{url_for('feed.show')}}");
+    });
+
+    $(".like-btn").load('click', function(){
+        var action = 'like';
+        var li = $(this).parents('li').first();
+        var item = li.attr('data-id');
+        record(item, action);
+    });
+
+    $(".unlike-btn").load('click', function(){
+        var action = 'unlike';
+        var li = $(this).parents('li').first();
+        var item = li.attr('data-id');
+        record(item, action);
+    });
+})
+{% endblock %}

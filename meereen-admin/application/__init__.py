@@ -18,20 +18,23 @@ def createApp(env="default"):
     app.private = rsaKey[1]
     app.mysql = mysql.MysqlUtil(config)
     app.redis = sredis.RedisUtil(config)
-    # app.mongo = mongo.MongoUtil(config)
+    app.mongo = mongo.MongoUtil(config)
     return app
 
 app = createApp()
 
+from functools import wraps
 def hasLogin(func):
-    def wrapper():
+    @wraps(func)
+    def wrapper(*args,**kwargs):
+        print url_for("feed.show")
         if 'username' not in session:
             method = request.method
             if method == 'GET':
                 return redirect(url_for('login.login'))
             else:
                 return jsonify({'error': 999})
-        return func()
+        return func(*args,**kwargs)
     return wrapper
 
 from bp import registerBp

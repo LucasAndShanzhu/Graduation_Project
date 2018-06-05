@@ -15,6 +15,8 @@ class RecordModel(object):
         except Exception as e:
             print e
             success = False
+        connect = app.mysql.getConnect()
+        connect.commit()
         app.mysql.close()
         return success
 

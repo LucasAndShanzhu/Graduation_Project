@@ -191,8 +191,7 @@
                                 } else if(error == 3) {
                                     alert("此邮箱已经进行了注册");
                                 } else if(error == 0) {
-                                    //window.location.href = "{{url_for('login.login')}}";
-                                    alert('ok');
+                                    window.location.href = "{{url_for('feed.show')}}";
                                 }
                             },
                             error: function(){
