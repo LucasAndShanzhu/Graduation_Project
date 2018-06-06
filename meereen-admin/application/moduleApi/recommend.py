@@ -104,6 +104,7 @@ class RecommendApi(object):
 
     def _mapUserCharater(self, record):
         itemId, action, createdAt = record
+        createdAt = str(createdAt)
         self.mongoUtil.link()
         collect = self.mongoUtil.getCollect("article_big_image")
         queryCondition = {'_id': ObjectId(itemId)}

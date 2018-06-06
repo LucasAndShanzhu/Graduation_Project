@@ -24,8 +24,8 @@ def show():
         for itemSet in itemIdList:
             itemId = itemSet[0]
             itemData = collect.find_one({'_id': ObjectId(itemId)})
-            itemData['cover'] = 'https://spider-lucas.oss-cn-beijing.aliyuncs.com/image/' + itemData['image'][0] if itemData.get('image', []) else ''
-            itemData['detail'] = itemData['detail'] if itemData.get('detail', '') else u'暂无简介'
+            itemData['cover'] = itemData['image'][0] if itemData.get('image', []) else ''
+            itemData['detail'] = itemData['detail'] if itemData.get('detail', '') else itemData['title']
             itemData['author'] = itemData['source_detail']
             itemData['_id'] = str(itemData['_id'])
             itemData['url'] = 'https://spider-lucas.oss-cn-beijing.aliyuncs.com/html/' + itemData['content']
