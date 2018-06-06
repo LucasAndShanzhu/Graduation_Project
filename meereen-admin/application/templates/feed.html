@@ -203,10 +203,14 @@ $(document).ready(function(){
     });
 
     $(".like-btn").click(function(){
-        var action = 'like';
-        var li = $(this).parents('li').first();
-        var item = li.attr('data-id');
-        record(item, action);
+        if ($(this).hasClass('glyphicon-thumbs-up')) {
+            var action = 'like';
+            var li = $(this).parents('li').first();
+            var item = li.attr('data-id');
+            record(item, action);
+            $(this).removeClass('glyphicon-thumbs-up');
+            $(this).addClass('glyphicon glyphicon-heart');
+        }
     });
 
     $(".unlike-btn").click(function(){
@@ -214,6 +218,7 @@ $(document).ready(function(){
         var li = $(this).parents('li').first();
         var item = li.attr('data-id');
         record(item, action);
+        li.remove()
     });
 })
 {% endblock %}
