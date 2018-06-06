@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, request, render_template, jsonify, session
 from bson import ObjectId
+from urllib2 import unquote
 from application import app, hasLogin
 from ..common import mongo
 from ..model import userModel
@@ -25,6 +26,9 @@ def show():
             itemId = itemSet[0]
             itemData = collect.find_one({'_id': ObjectId(itemId)})
             itemData['cover'] = itemData['image'][0] if itemData.get('image', []) else ''
+            if itemData['cover']:
+                url = itemData['cover'].split('url=')[1]
+                itemData['cover'] = unquote(url)
             itemData['detail'] = itemData['detail'] if itemData.get('detail', '') else itemData['title']
             itemData['author'] = itemData['source_detail']
             itemData['_id'] = str(itemData['_id'])
