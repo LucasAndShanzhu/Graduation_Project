@@ -27,7 +27,12 @@ def show():
             itemData = collect.find_one({'_id': ObjectId(itemId)})
             itemData['cover'] = itemData['image'][0] if itemData.get('image', []) else ''
             if itemData['cover']:
-                url = itemData['cover'].split('url=')[1]
+                urlL = itemData['cover'].split('url=')
+                url = ''
+                if len(urlL) == 2:
+                    url = url[1]
+                else:
+                    url = itemData['cover']
                 itemData['cover'] = unquote(url)
             itemData['detail'] = itemData['detail'] if itemData.get('detail', '') else itemData['title']
             itemData['author'] = itemData['source_detail']
